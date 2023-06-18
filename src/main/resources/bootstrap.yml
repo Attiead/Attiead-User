@@ -1,5 +1,5 @@
 spring:
   cloud:
     config:
-      url: http://13.124.245.140
-      name: user-service
+      uri: http://13.124.245.140
+      name: user-service-dev
