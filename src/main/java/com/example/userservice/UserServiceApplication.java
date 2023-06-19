@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableEurekaClient
+//@EnableEurekaClient
 @RestController
 public class UserServiceApplication {
 
