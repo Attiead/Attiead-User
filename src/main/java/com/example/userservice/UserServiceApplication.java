@@ -29,4 +29,10 @@ public class UserServiceApplication {
 
         return "User 서비스의 기본 content는 = " + content;
     }
+
+    @GetMapping("/test")
+    public String test(@Value("${test}") String test) {
+
+        return "User 서비스의 기본 test = " + test;
+    }
 }
