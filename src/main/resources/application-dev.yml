@@ -4,8 +4,8 @@ spring:
   rabbitmq:
     host: 43.201.185.6
     port: 5672
-    username: admin
-    password: admin
+    username: guest
+    password: guest
 
 eureka:
   instance:
