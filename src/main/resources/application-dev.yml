@@ -1,6 +1,11 @@
 spring:
   application:
     name: user-service
+  rabbitmq:
+    host: 43.201.185.6
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   instance:
