@@ -1,18 +1,19 @@
-spring:
-  application:
-    name: user-service
-  rabbitmq:
-    host: 43.201.185.6
-    port: 5672
-    username: guest
-    password: guest
+#spring:
+#  application:
+#    name: user-service
+#  rabbitmq:
+#    host: 43.201.185.6
+#    port: 5672
+#    username: guest
+#    password: guest
 
-eureka:
-  instance:
-    instance-id: user-microservice-instance
+#eureka:
+#  instance:
+#    instance-id: user-microservice-instance
+#
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://3.35.145.182/eureka
 
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://3.35.145.182/eureka
