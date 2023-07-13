@@ -1,16 +1,3 @@
-#version: '3'
-#services:
-#  mysql:
-#    image: mysql:8.0
-#    container_name: mysql
-#    ports:
-#      - 3306:3306 # HOST:CONTAINER
-#    environment:
-#      MYSQL_ROOT_PASSWORD: 1234
-#      TZ: Asia/Seoul
-#    command:
-#      - --character-set-server=utf8mb4
-#      - --collation-server=utf8mb4_unicode_ci
 version: "3"	#docker version 3 사용
 services: 	#service들 정의
   database: 	#service 이름
@@ -26,6 +13,7 @@ services: 	#service들 정의
       - ./db/data:/var/lib/mysql
     networks:		#사용할 네트워크 지정
       - starbucks_network_02
+
   webapp:
     build:		#image를 DockerFile 기반으로 사용한다
       context: .	#DockerFile이 있는 디렉토리
@@ -41,6 +29,39 @@ services: 	#service들 정의
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 1234
       SPRING_PROFILES_ACTIVE: dev		#사용할 profile 지정
+    networks:
+      - starbucks_network_02
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+    ports:
+      - "22181:2181"
+    networks:
+      - starbucks_network_02
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+       - zookeeper
+    ports:
+      - "29092:29092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CREATE_TOPICS: "my-topic"   # Topic명:Partition개수:Replica개수
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - starbucks_network_02
 

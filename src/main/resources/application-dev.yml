@@ -23,3 +23,26 @@ spring:
     url: jdbc:mysql://database:3306/user-service?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
     username: root
     password: 1234
+
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      client-id: my-producer
+      retries: 1
+      batch-size: 16384
+      buffer-memory: 33554432
+      compression-type: snappy
+
+    consumer:
+      group-id: user-service
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+    properties:
+      spring:
+      deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+      json:
+        trusted.packages: "*"
+        type.mapping: " com.example.userservice.KafkaConsumeEvent"
