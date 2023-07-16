@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class KafkaEventListener {
 
     @KafkaListener(topics = {"my-topic"})
-    public void handle(KafkaConsumeEvent kafkaConsumeEvent) {
-        System.out.println("이벤트 : " + kafkaConsumeEvent.toString());
+    public void handle(KafkaProduceEvent kafkaProduceEvent) {
+        System.out.println("이벤트 : " + kafkaProduceEvent.toString());
     }
 }

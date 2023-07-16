@@ -20,9 +20,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://database:3306/user-service?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 1234
+    url: ${DB_HOST_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   kafka:
     bootstrap-servers: kafka:9092
@@ -45,4 +45,7 @@ spring:
       deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
       json:
         trusted.packages: "*"
-        type.mapping: " com.example.userservice.KafkaConsumeEvent"
+        type.mapping: "com.example.userservice.KafkaConsumeEvent"
+
+kafka-topic:
+  user-service: ${USER_SERVICE_TOPIC}
