@@ -13,6 +13,7 @@ public class SampleController {
     @GetMapping("/kafka")
     public String send() {
         System.out.println("he");
+        System.out.println("he");
         kafkaProducer.eventPublish();
         return "Send";
     }
