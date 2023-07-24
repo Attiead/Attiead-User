@@ -19,33 +19,41 @@
 
 spring:
   datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: ${DB_HOST_URL}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3307/user-service
+#    url: jdbc:mariadb://localhost:23306/user-service
+    username: root
+    password: 1234
+#    driver-class-name: org.mariadb.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${DB_HOST_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+#
+#  kafka:
+#    bootstrap-servers: localhost:29092
+#    producer:
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      client-id: my-producer
+#      retries: 1
+#      batch-size: 16384
+#      buffer-memory: 33554432
+#      compression-type: snappy
+#
+#    consumer:
+#      group-id: user-service
+#      auto-offset-reset: latest
+#      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+##      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+#      properties:
+#        spring:
+#          deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+#          json:
+#            trusted.packages: "*"
+#            type.mapping: like:com.example.userservice.infrastructure.kafka.KafkaConsumeEvent
 
-  kafka:
-    bootstrap-servers: kafka:9092
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      client-id: my-producer
-      retries: 1
-      batch-size: 16384
-      buffer-memory: 33554432
-      compression-type: snappy
-
-    consumer:
-      group-id: user-service
-      auto-offset-reset: latest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
-    properties:
-      spring:
-      deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
-      json:
-        trusted.packages: "*"
-        type.mapping: "com.example.userservice.KafkaConsumeEvent"
-
-kafka-topic:
-  user-service: ${USER_SERVICE_TOPIC}
+#kafka-topic:
+#  user-service: "my-topic"
+#  user-service: ${USER_SERVICE_TOPIC}

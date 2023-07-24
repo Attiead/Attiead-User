@@ -1,9 +1,7 @@
-package com.example.userservice;
+package com.example.userservice.infrastructure.kafka;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
-
-import java.awt.print.Printable;
 
 @Component
 public class KafkaEventListener {
