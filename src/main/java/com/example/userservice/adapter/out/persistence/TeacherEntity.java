@@ -2,43 +2,39 @@ package com.example.userservice.adapter.out.persistence;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "users")
+@Table(name = "teacher")
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserEntity {
+public class TeacherEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
-    @Column(name = "user_email", nullable = false, length = 100, unique = true)
-    private String userEmail;
+    @Column(name = "teacher_email", nullable = false, length = 100, unique = true)
+    private String teacherEmail;
 
-    @Column(name = "user_password", nullable = false, length = 15)
-    private String userPassword;
+    @Column(name = "teacher_password", nullable = false, length = 15)
+    private String teacherPassword;
 
-    @Column(name = "user_grade", nullable = false, length = 1)
-    @ColumnDefault("0")
-    private int userGrade;
-
-    @Column(name = "user_status", nullable = false, length = 1)
+    @Column(name = "teacher_status", nullable = false, length = 1)
     @ColumnDefault("true")
-    private boolean userStatus;
+    private boolean teacherStatus;
 
-    @Column(name = "user_name", nullable = false, length = 50)
-    private String userName;
-
-    @Column(name = "nick_name", nullable = true, length = 50)
-    private String nickName;
+    @Column(name = "teacher_name", nullable = false, length = 50)
+    private String teacherName;
 
     @Column(name = "comment", nullable = true, length = 100)
     private String comment;
@@ -50,8 +46,8 @@ public class UserEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDttm;
 
-    @Column(name = "secret_status", nullable = true, length = 20)
-    @ColumnDefault("true")
-    private boolean secretStatus;
+    @Column(name = "subject", nullable = false, length = 20)
+    private String subject;
+
 
 }
