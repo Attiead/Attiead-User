@@ -20,10 +20,6 @@ public class ManagerEntity {
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "uid", nullable = false, length = 100, unique = true)
-    private Long uid;
-
     @Column(name = "manager_email", nullable = false, length = 100, unique = true)
     private String managerEmail;
 
