@@ -1,5 +1,7 @@
 package com.example.userservice.adapter.out.persistence;
 
+import com.example.userservice.domain.UserGrade;
+import com.example.userservice.domain.UserRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,6 +22,10 @@ public class UserEntity {
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "uid", nullable = false, length = 100, unique = true)
+    private Long uid;
+
     @Column(name = "user_email", nullable = false, length = 100, unique = true)
     private String userEmail;
 
@@ -28,11 +34,17 @@ public class UserEntity {
 
     @Column(name = "user_grade", nullable = false, length = 1)
     @ColumnDefault("0")
-    private int userGrade;
+    @Enumerated(EnumType.STRING)
+    private UserGrade userGrade;
 
-    @Column(name = "user_status", nullable = false, length = 1)
+    @Column(name = "is_user_status", nullable = false, length = 1)
     @ColumnDefault("true")
-    private boolean userStatus;
+    private boolean isUserStatus;
+
+    @Column(name = "user_role", nullable = false, length = 1)
+    @ColumnDefault("0")
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 
     @Column(name = "user_name", nullable = false, length = 50)
     private String userName;
@@ -43,15 +55,12 @@ public class UserEntity {
     @Column(name = "comment", nullable = true, length = 100)
     private String comment;
 
-    @Column(name = "img_path", nullable = true, length = 20)
-    private String imgPath;
-
     @Column(name = "create_dttm", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDttm;
 
-    @Column(name = "secret_status", nullable = true, length = 20)
+    @Column(name = "is_secret_status", nullable = true, length = 20)
     @ColumnDefault("true")
-    private boolean secretStatus;
+    private boolean isSecretStatus;
 
 }
