@@ -30,9 +30,9 @@ public class UserEntity {
     @ColumnDefault("0")
     private int userGrade;
 
-    @Column(name = "is_user_status", nullable = false, length = 1)
+    @Column(name = "user_status", nullable = false, length = 1)
     @ColumnDefault("true")
-    private boolean isUserStatus;
+    private boolean userStatus;
 
     @Column(name = "user_name", nullable = false, length = 50)
     private String userName;
@@ -43,12 +43,15 @@ public class UserEntity {
     @Column(name = "comment", nullable = true, length = 100)
     private String comment;
 
+    @Column(name = "img_path", nullable = true, length = 20)
+    private String imgPath;
+
     @Column(name = "create_dttm", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDttm;
 
-    @Column(name = "is_secret_status", nullable = true, length = 20)
+    @Column(name = "secret_status", nullable = true, length = 20)
     @ColumnDefault("true")
-    private boolean isSecretStatus;
+    private boolean secretStatus;
 
 }
