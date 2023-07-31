@@ -1,5 +1,6 @@
 package com.example.userservice.adapter.out.persistence;
 
+import com.example.userservice.domain.ManagerGrade;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +21,10 @@ public class ManagerEntity {
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "uid", nullable = false, length = 100, unique = true)
+    private Long uid;
+
     @Column(name = "manager_email", nullable = false, length = 100, unique = true)
     private String managerEmail;
 
@@ -28,7 +33,8 @@ public class ManagerEntity {
 
     @Column(name = "manager_grade", nullable = false, length = 1)
     @ColumnDefault("0")
-    private int managerGrade;
+    @Enumerated(EnumType.STRING)
+    private ManagerGrade managerGrade;
 
     @Column(name = "manager_name", nullable = false, length = 50)
     private String managerName;
