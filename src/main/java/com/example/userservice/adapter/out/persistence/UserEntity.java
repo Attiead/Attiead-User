@@ -10,6 +10,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -24,9 +25,9 @@ public class UserEntity {
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "uid", nullable = false, length = 100, unique = true)
-    private Long uid;
+    @GeneratedValue
+    @Column(name="uid", nullable = false, length = 36, columnDefinition = "BINARY(16)")
+    private UUID uid;
 
     @Column(name = "user_email", nullable = false, length = 100, unique = true)
     private String userEmail;
@@ -34,18 +35,15 @@ public class UserEntity {
     @Column(name = "user_password", nullable = false, length = 15)
     private String userPassword;
 
-    @Column(name = "user_grade", nullable = false, length = 1)
-    @ColumnDefault("0")
+    @Column(name = "user_grade", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserGrade userGrade;
 
-    @Column(name = "user_status", nullable = false, length = 1)
-    @ColumnDefault("0")
+    @Column(name = "user_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
 
-    @Column(name = "user_status", nullable = false, length = 1)
-    @ColumnDefault("0")
+    @Column(name = "user_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
@@ -62,8 +60,8 @@ public class UserEntity {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime createDttm;
 
-    @Column(name = "secret_status", nullable = true, length = 1)
-    @ColumnDefault("0")
+    @Column(name = "secret_status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private SecretStatus secretStatus;
 
 }
