@@ -7,7 +7,6 @@ import com.example.userservice.domain.UserStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -17,7 +16,6 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class UserEntity {
 
     @Id
@@ -25,9 +23,8 @@ public class UserEntity {
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
-    @GeneratedValue
-    @Column(name="uid", nullable = false, length = 36, columnDefinition = "BINARY(16)")
-    private UUID uid;
+    @Column(name="uid", nullable = false, length = 36)
+    private String uid;
 
     @Column(name = "user_email", nullable = false, length = 100, unique = true)
     private String userEmail;
@@ -63,5 +60,9 @@ public class UserEntity {
     @Column(name = "secret_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private SecretStatus secretStatus;
+
+    public UserEntity() {
+        this.uid = UUID.randomUUID().toString();
+    }
 
 }

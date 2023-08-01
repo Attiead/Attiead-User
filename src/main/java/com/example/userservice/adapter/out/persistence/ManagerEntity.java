@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.UUID;
 
@@ -16,7 +13,6 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-@NoArgsConstructor
 public class ManagerEntity {
 
     @Id
@@ -24,9 +20,8 @@ public class ManagerEntity {
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
-    @GeneratedValue
-    @Column(name="mid", nullable = false, length = 36, columnDefinition = "BINARY(16)")
-    private UUID mid;
+    @Column(name="mid", nullable = false, length = 36)
+    private String mid;
 
     @Column(name = "manager_email", nullable = false, length = 100, unique = true)
     private String managerEmail;
@@ -40,4 +35,8 @@ public class ManagerEntity {
 
     @Column(name = "manager_name", nullable = false, length = 50)
     private String managerName;
+
+    public ManagerEntity() {
+        this.mid = UUID.randomUUID().toString();
+    }
 }
