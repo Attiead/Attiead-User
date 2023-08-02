@@ -20,8 +20,8 @@ public class ManagerEntity {
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
-    @Column(name="mid", nullable = false, length = 36)
-    private String mid;
+    @Column(name="mid", nullable = false, columnDefinition = "BINARY(16)")
+    private UUID mid;
 
     @Column(name = "manager_email", nullable = false, length = 100, unique = true)
     private String managerEmail;
@@ -37,6 +37,6 @@ public class ManagerEntity {
     private String managerName;
 
     public ManagerEntity() {
-        this.mid = UUID.randomUUID().toString();
+        this.mid = UUID.randomUUID();
     }
 }

@@ -23,8 +23,8 @@ public class UserEntity {
     @Column(name = "sid", nullable = false, length = 100)
     private Long sid;
 
-    @Column(name="uid", nullable = false, length = 36)
-    private String uid;
+    @Column(name="uid", nullable = false, columnDefinition = "BINARY(16)")
+    private UUID uid;
 
     @Column(name = "user_email", nullable = false, length = 100, unique = true)
     private String userEmail;
@@ -62,7 +62,7 @@ public class UserEntity {
     private SecretStatus secretStatus;
 
     public UserEntity() {
-        this.uid = UUID.randomUUID().toString();
+        this.uid = UUID.randomUUID();
     }
 
 }
