@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RequiredArgsConstructor
 @RestControllerAdvice
 @Slf4j
-public class ExceptionAdvice {
+public class ExceptionAdviceHandler {
 
 
 }

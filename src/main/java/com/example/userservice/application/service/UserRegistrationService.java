@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserRegistrationService implements UserRegistrationUseCase {
     @Override
-    public void registration(String userId) {
+    public void register(String userId) {
         // TODO document why this method is empty
     }
 }
