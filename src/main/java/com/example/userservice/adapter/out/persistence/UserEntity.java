@@ -1,14 +1,13 @@
 package com.example.userservice.adapter.out.persistence;
 
+import com.example.userservice.common.response.model.BaseEntity;
 import com.example.userservice.domain.SecretStatus;
 import com.example.userservice.domain.UserGrade;
 import com.example.userservice.domain.UserRole;
 import com.example.userservice.domain.UserStatus;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -16,53 +15,40 @@ import java.util.UUID;
 @Getter
 @Builder
 @AllArgsConstructor
-public class UserEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "sid", nullable = false, length = 100)
-    private Long sid;
+@NoArgsConstructor
+public class UserEntity extends BaseEntity {
 
     @Column(name="uid", nullable = false, columnDefinition = "BINARY(16)")
-    private UUID uid;
+    @Builder.Default private UUID uid = UUID.randomUUID();
 
-    @Column(name = "user_email", nullable = false, length = 100, unique = true)
-    private String userEmail;
+    @Column(name = "email", nullable = false, length = 100, unique = true)
+    private String email;
 
-    @Column(name = "user_password", nullable = false, length = 15)
-    private String userPassword;
+    @Column(name = "password", nullable = false, length = 15)
+    private String password;
 
-    @Column(name = "user_grade", nullable = false)
+    @Column(name = "grade", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserGrade userGrade;
+    private UserGrade grade;
 
-    @Column(name = "user_status", nullable = false)
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserStatus userStatus;
+    private UserStatus status;
 
-    @Column(name = "user_status", nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRole userRole;
+    private UserRole role;
 
-    @Column(name = "user_name", nullable = false, length = 50)
-    private String userName;
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 
-    @Column(name = "nick_name", nullable = true, length = 50)
-    private String nickName;
+    @Column(name = "nickname", nullable = true, length = 50)
+    private String nickname;
 
     @Column(name = "comment", nullable = true, length = 100)
     private String comment;
 
-    @Column(name = "create_dttm", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime createDttm;
-
     @Column(name = "secret_status", nullable = false)
     @Enumerated(EnumType.STRING)
     private SecretStatus secretStatus;
-
-    public UserEntity() {
-        this.uid = UUID.randomUUID();
-    }
-
 }
