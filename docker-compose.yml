@@ -11,7 +11,7 @@ services: 	#service들 정의
     ports:		#port 지정
       - "3307:3306"
     volumes:	#볼륨 지정
-      - ./db/data:/var/lib/mysql
+      - ./db/data:/var/lib/mysql2
 
 #
 #  zookeeper:

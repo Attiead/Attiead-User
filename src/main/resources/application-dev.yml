@@ -29,6 +29,16 @@ spring:
     password: 1234
 #    driver-class-name: org.mariadb.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update # update #validate
+    properties:
+      hibernate.format_sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+
 #
 #  kafka:
 #    bootstrap-servers: localhost:29092
@@ -57,3 +67,4 @@ spring:
 #kafka-topic:
 #  user-service: "my-topic"
 #  user-service: ${USER_SERVICE_TOPIC}
+
