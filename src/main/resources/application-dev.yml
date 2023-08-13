@@ -39,6 +39,10 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
 
+  security:
+    user:
+      password: 1
+
 #
 #  kafka:
 #    bootstrap-servers: localhost:29092
