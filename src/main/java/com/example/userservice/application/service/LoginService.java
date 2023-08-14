@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LoginService implements LoginUseCase {
+
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;	// 추가
     private final TokenProvider tokenProvider;	// 추가
