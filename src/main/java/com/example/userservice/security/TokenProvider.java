@@ -3,10 +3,11 @@ package com.example.userservice.security;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,10 +16,12 @@ public class TokenProvider {
 
     public String createToken(UUID uid) {
 
+        Instant issueAt = Instant.now();
+
         // Prepare the JWT builder
         io.jsonwebtoken.JwtBuilder jwtBuilder = Jwts.builder()
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1 * 60 * 1000));
+                .setIssuedAt(Date.from(issueAt))
+                .setExpiration(Date.from(issueAt.plus(1, ChronoUnit.MINUTES)));
 
         // Prepare the signing key
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
