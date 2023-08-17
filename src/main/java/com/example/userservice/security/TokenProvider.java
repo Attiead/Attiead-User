@@ -1,8 +1,10 @@
 package com.example.userservice.security;
 
+import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -14,6 +16,9 @@ import java.util.UUID;
 @Service
 public class TokenProvider {
 
+    @Value("${security.jwt.expired}")
+    private int jwtExpired;
+
     public String createToken(UUID uid) {
 
         Instant issueAt = Instant.now();
@@ -21,7 +26,7 @@ public class TokenProvider {
         // Prepare the JWT builder
         io.jsonwebtoken.JwtBuilder jwtBuilder = Jwts.builder()
                 .setIssuedAt(Date.from(issueAt))
-                .setExpiration(Date.from(issueAt.plus(1, ChronoUnit.MINUTES)));
+                .setExpiration(Date.from(issueAt.plus(jwtExpired, ChronoUnit.MINUTES)));
 
         // Prepare the signing key
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

@@ -17,6 +17,10 @@
 #    service-url:
 #      defaultZone: http://3.35.145.182/eureka
 
+security:
+  jwt:
+    expired: 1
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/user-service
