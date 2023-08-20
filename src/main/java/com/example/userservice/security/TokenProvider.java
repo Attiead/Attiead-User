@@ -17,9 +17,9 @@ import java.util.UUID;
 public class TokenProvider {
 
     @Value("${security.jwt.expired}")
-    private int jwtExpired;
+    private static int jwtExpired;
 
-    public String createToken(UUID uid) {
+    public static String createToken(UUID uid) {
 
         Instant issueAt = Instant.now();
 

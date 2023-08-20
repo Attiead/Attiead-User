@@ -1,17 +1,22 @@
 package com.example.userservice.domain;
 
-import lombok.AccessLevel;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.io.Serializable;
+import java.util.UUID;
+
 
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class User {
+@AllArgsConstructor
+public class User implements Serializable {
 
-    private UserAccount userAccount;
+    private UUID uid;
+    private String email;
+    private String password;
     private UserGrade grade;
     private UserStatus status;
     private UserRole role;
