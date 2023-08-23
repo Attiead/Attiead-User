@@ -17,14 +17,14 @@ import java.util.UUID;
 public class TokenProvider {
 
     @Value("${security.jwt.expired}")
-    private static int jwtExpired;
+    private static long jwtExpired;
 
     public static String createToken(UUID uid) {
 
         Instant issueAt = Instant.now();
 
         // Prepare the JWT builder
-        io.jsonwebtoken.JwtBuilder jwtBuilder = Jwts.builder()
+        JwtBuilder jwtBuilder = Jwts.builder()
                 .setIssuedAt(Date.from(issueAt))
                 .setExpiration(Date.from(issueAt.plus(jwtExpired, ChronoUnit.MINUTES)));
 

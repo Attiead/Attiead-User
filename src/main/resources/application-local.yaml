@@ -19,7 +19,7 @@
 
 security:
   jwt:
-    expired: 1
+    expired: 3600
 
 spring:
   datasource:

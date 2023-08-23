@@ -1,18 +1,16 @@
 package com.example.userservice.domain;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.io.Serializable;
 import java.util.UUID;
 
 
 @Getter
 @Builder
 @AllArgsConstructor
-public class User implements Serializable {
+public class User {
 
     private UUID uid;
     private String email;

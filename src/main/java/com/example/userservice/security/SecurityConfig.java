@@ -4,13 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFilter;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -33,16 +37,14 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/api/v1/user/sign-up")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/v1/user/test")).permitAll()
 //                        .requestMatchers(HttpMethod.POST).hasAuthority("write")
-                        .anyRequest().denyAll()
                 )
                 .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
     // 비밀번호 암호화 모듈 추가
-
     @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -53,8 +55,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    public CustomAuthenticationFilter customAuthenticationFilter() {
-        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
+    public UsernamePasswordAuthenticationFilter customAuthenticationFilter() {
+
+        UsernamePasswordAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
         customAuthenticationFilter.setFilterProcessesUrl("/api/v1/user/sign-in");
         customAuthenticationFilter.setAuthenticationSuccessHandler(customLoginSuccessHandler());
         customAuthenticationFilter.afterPropertiesSet();
@@ -63,12 +66,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public CustomLoginSuccessHandler customLoginSuccessHandler() {
+    public SavedRequestAwareAuthenticationSuccessHandler customLoginSuccessHandler() {
         return new CustomLoginSuccessHandler();
     }
 
     @Bean
-    public CustomAuthenticationProvider customAuthenticationProvider() {
+    public AuthenticationProvider customAuthenticationProvider() {
         return new CustomAuthenticationProvider(userDetailsService, passwordEncoder());
     }
 
