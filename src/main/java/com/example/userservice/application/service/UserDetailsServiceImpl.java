@@ -10,22 +10,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;
-    private final ObjectMapper objectMapper;
 
     @Override
     public CustomUserDetails loadUserByUsername(String userEmail) {
         try {
-            Optional<UserEntity> userEntity = userRepository.findByEmail(userEmail);
-            User user = objectMapper.convertValue(userEntity, User.class);
-
-            return new CustomUserDetails(user);
+            return new CustomUserDetails(
+                    User.userEntityToUser(userRepository.findByEmail(userEmail)
+                            .orElseThrow(() -> new NoSuchElementException("UserEntity not found"))));
         } catch (UserNotFoundException e) {
             throw new UserNotFoundException("userNotFound = " + userEmail);
         }

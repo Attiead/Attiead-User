@@ -1,8 +1,10 @@
 package com.example.userservice.security;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -20,6 +22,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityConfig {
 //    private final String[] allowedUrls = {"/api/v1/user/sign-in"};	// sign-up, sign-in 추가
 
@@ -31,14 +34,8 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement ->
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )	// 세션을 사용하지 않으므로 STATELESS 설정
-                .csrf(AbstractHttpConfigurer::disable)  //cross site request 는 쿠키를 기반한 인증방식, REST API에서는 사용안해도 무d
-                .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/user/sign-in")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/user/sign-up")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/api/v1/user/test")).permitAll()
-//                        .requestMatchers(HttpMethod.POST).hasAuthority("write")
-                )
-                .addFilterBefore(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .csrf(AbstractHttpConfigurer::disable)  //cross site request 는 쿠키를 기반한 인증방식, REST API에서는 사용안해도 무방
+                .addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
@@ -58,11 +55,10 @@ public class SecurityConfig {
     public UsernamePasswordAuthenticationFilter customAuthenticationFilter() {
 
         UsernamePasswordAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManager());
-        customAuthenticationFilter.setFilterProcessesUrl("/api/v1/user/sign-in");
+        customAuthenticationFilter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/api/v1/user/sign-in", HttpMethod.POST.name()));
         customAuthenticationFilter.setAuthenticationSuccessHandler(customLoginSuccessHandler());
-        customAuthenticationFilter.afterPropertiesSet();
-        return customAuthenticationFilter;
 
+        return customAuthenticationFilter;
     }
 
     @Bean

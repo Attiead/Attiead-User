@@ -20,14 +20,13 @@ public class LoginController {
     private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
 
-    //시큐리티 테스트 api
-    @PostMapping("/sign-in")
-    public ResponseEntity login(@RequestBody UserAccountDto userAccountDto) {
-
-        User user = loginUseCase.login(userAccountDto);
-
-        return ResponseEntity.ok(tokenProvider.createToken(user.getUid()));
-    }
+//    @PostMapping("/sign-in")
+//    public ResponseEntity login(@RequestBody UserAccountDto userAccountDto) {
+//
+//        User user = loginUseCase.login(userAccountDto);
+//
+//        return ResponseEntity.ok(tokenProvider.createToken(user.getUid()));
+//    }
 
     @PostMapping("/sign-up")
     public String test(String email, String password) {

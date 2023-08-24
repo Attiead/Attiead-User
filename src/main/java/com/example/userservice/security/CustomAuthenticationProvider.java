@@ -7,7 +7,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -22,7 +21,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         AbstractAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         String userEmail = (String)token.getPrincipal();
         String userPw = (String) token.getCredentials();
-
         CustomUserDetails userDetailsDto = (CustomUserDetails) userDetailsService.loadUserByUsername(userEmail);
 //        if (!passwordEncoder.matches(userPw, userDetailsDto.getUser().getPassword())) {
         if (!userPw.equals(userDetailsDto.getUser().getPassword())) {
