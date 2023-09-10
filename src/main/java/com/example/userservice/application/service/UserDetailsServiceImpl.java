@@ -19,6 +19,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public CustomUserDetails loadUserByUsername(String userEmail) {
         return new CustomUserDetails(
                 User.userEntityToUser(userRepository.findByEmail(userEmail)
-                        .orElseThrow(() -> new UserNotFoundException("userNotFound = " + userEmail))));
+                        .orElseThrow(() -> new UserNotFoundException("존재하지 않는 이용자 입니다. 이용자명 : " + userEmail))));
     }
 }
