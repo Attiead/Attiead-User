@@ -22,7 +22,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String userEmail = (String)token.getPrincipal();
         String userPw = (String) token.getCredentials();
         CustomUserDetails userDetailsDto = (CustomUserDetails) userDetailsService.loadUserByUsername(userEmail);
-//        if (!passwordEncoder.matches(userPw, userDetailsDto.getUser().getPassword())) {
         if (!userPw.equals(userDetailsDto.getUser().getPassword())) {
             throw new BadCredentialsException(userDetailsDto.getName() + "Invalid password");
         }
