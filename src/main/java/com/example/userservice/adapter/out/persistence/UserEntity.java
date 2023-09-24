@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UserEntity extends BaseEntity {
 
-    @Column(name="uid", nullable = false, columnDefinition = "BINARY(16)")
+    @Column(name="uid", nullable = false)
     @Builder.Default private UUID uid = UUID.randomUUID();
 
     @Column(name = "email", nullable = false, length = 100, unique = true)
