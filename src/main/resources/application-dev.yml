@@ -72,3 +72,8 @@ spring:
 #  user-service: "my-topic"
 #  user-service: ${USER_SERVICE_TOPIC}
 
+logging:
+  level:
+    org:
+      springframework:
+        security=DEBUG:
