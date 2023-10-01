@@ -20,8 +20,8 @@ public class User {
     private UserRole role;
     private String name;
     private String nickname;
-    private String comment;
-    private SecretStatus secretStatus;
+    private String biography;
+    private Visibilities visibilities;
 
     public static User userEntityToUser(UserEntity userEntity) {
         return User.builder()
@@ -33,9 +33,23 @@ public class User {
                     .role(userEntity.getRole())
                     .name(userEntity.getName())
                     .nickname(userEntity.getNickname())
-                    .comment(userEntity.getComment())
-                    .secretStatus(userEntity.getSecretStatus())
+                    .biography(userEntity.getBiography())
+                    .visibilities(userEntity.getVisibilities())
                     .build();
 
+    }
+
+    public static UserEntity userToUserEntity(User user) {
+        return UserEntity.builder()
+            .email(user.getEmail())
+            .password(user.getPassword())
+            .grade(user.getGrade() == null ? UserGrade.BRONZE : user.getGrade())
+            .status(user.getStatus() == null ? UserStatus.ACTIVE : user.getStatus())
+            .role(user.getRole() == null ? UserRole.STUDENT : user.getRole())
+            .name(user.getName())
+            .nickname(user.getNickname())
+            .biography(user.getBiography())
+            .visibilities(user.getVisibilities() == null ? Visibilities.OPENED : user.getVisibilities())
+            .build();
     }
 }

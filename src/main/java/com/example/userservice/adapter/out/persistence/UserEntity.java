@@ -1,7 +1,7 @@
 package com.example.userservice.adapter.out.persistence;
 
 import com.example.userservice.common.response.model.BaseEntity;
-import com.example.userservice.domain.SecretStatus;
+import com.example.userservice.domain.Visibilities;
 import com.example.userservice.domain.UserGrade;
 import com.example.userservice.domain.UserRole;
 import com.example.userservice.domain.UserStatus;
@@ -29,15 +29,15 @@ public class UserEntity extends BaseEntity {
 
     @Column(name = "grade", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserGrade grade;
+    @Builder.Default private UserGrade grade = UserGrade.BRONZE;
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    @Builder.Default private UserStatus status = UserStatus.ACTIVE;
 
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    @Builder.Default private UserRole role = UserRole.STUDENT;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
@@ -45,10 +45,10 @@ public class UserEntity extends BaseEntity {
     @Column(name = "nickname", nullable = true, length = 50)
     private String nickname;
 
-    @Column(name = "comment", nullable = true, length = 100)
-    private String comment;
+    @Column(name = "biography", nullable = true, length = 100)
+    private String biography;
 
-    @Column(name = "secret_status", nullable = false)
+    @Column(name = "visibilities", nullable = false)
     @Enumerated(EnumType.STRING)
-    private SecretStatus secretStatus;
+    @Builder.Default private Visibilities visibilities = Visibilities.OPENED;
 }
