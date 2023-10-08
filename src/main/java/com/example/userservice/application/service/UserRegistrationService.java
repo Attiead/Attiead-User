@@ -1,9 +1,11 @@
 package com.example.userservice.application.service;
 
-import com.example.userservice.adapter.out.persistence.UserRepository;
+import com.example.userservice.adapter.out.persistence.UserPersistenceAdapter;
+import com.example.userservice.application.port.in.dto.RequestUserDto;
+import com.example.userservice.application.port.in.dto.ResponseUserDto;
 import com.example.userservice.application.usecase.UserRegistrationUseCase;
+import com.example.userservice.common.mapper.UserDomainMapper;
 import com.example.userservice.domain.User;
-import com.example.userservice.exception.ExistUserException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +13,15 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserRegistrationService implements UserRegistrationUseCase {
 
-    private UserRepository userRepository;
+    private UserPersistenceAdapter userPersistenceAdapter;
 
     @Override
-    public User register(User user) {
-        if(userRepository.existsByEmail(user.getEmail())) {
-            throw new ExistUserException("이미 사용 중인 이메일 입니다.");
-        }
+    public ResponseUserDto register(RequestUserDto userDto) {
+        userPersistenceAdapter.checkExistUser(userDto.getEmail());
 
-        return User.userEntityToUser(userRepository.save(User.userToUserEntity(user)));
+        User user = UserDomainMapper.INSTANCE.toUserDomain(userDto);
+        User savedUser = userPersistenceAdapter.register(user);
+
+        return UserDomainMapper.INSTANCE.toResponseUserDto(savedUser);
     }
 }

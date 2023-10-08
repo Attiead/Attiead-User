@@ -4,6 +4,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.1.2'
 	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 	id 'com.google.cloud.tools.jib' version '3.2.1'
+	id 'checkstyle'
 }
 
 group = 'com.example'
@@ -62,6 +63,13 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	testImplementation 'org.springframework.security:spring-security-test'
+
+  //mapstruct
+  implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+  annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+
+  //validation
+  implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
 //dependencyManagement {
@@ -90,3 +98,23 @@ jib { // https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plug
 		creationTime = "USE_CURRENT_TIMESTAMP"
 	}
 }
+
+checkstyle {
+	maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail
+	configFile = file("${rootDir}/config/checkstyle/googlechecks.xml") // 설정 파일 경로 지정
+	toolVersion = "8.36" // 처음에 낮은 버전을 사용했더니 깨지는 현상이 있었다. 설정파일의 내용에 맞는 버전을 선택
+}
+//compileJava.options.encoding = 'UTF-8'
+//compileTestJava.options.encoding = 'UTF-8'
+//
+//tasks.withType(Checkstyle) {
+//	reports {
+//		xml.required = true
+//		html.required = true
+//	}
+//}
+//
+//checkstyle {
+//	configFile = file("${rootDir}/config/googlechecks.xml") // 설정 파일 경로 지정
+////	configProperties = ["suppressionFile": "checkstyle/naver-checkstyle-suppressions.xml"]
+//}

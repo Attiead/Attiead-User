@@ -50,5 +50,5 @@ public class UserEntity extends BaseEntity {
 
     @Column(name = "visibilities", nullable = false)
     @Enumerated(EnumType.STRING)
-    @Builder.Default private Visibilities visibilities = Visibilities.OPENED;
+    @Builder.Default private Visibilities visibility = Visibilities.OPENED;
 }

@@ -1,7 +1,9 @@
 package com.example.userservice.application.usecase;
 
-import com.example.userservice.domain.User;
+import com.example.userservice.application.port.in.dto.RequestUserDto;
+import com.example.userservice.application.port.in.dto.ResponseUserDto;
 
 public interface UserRegistrationUseCase {
-    User register(User user);
+
+    ResponseUserDto register(RequestUserDto userDto);
 }
