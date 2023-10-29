@@ -26,7 +26,6 @@ public class LoginService implements LoginUseCase {
                 .filter(u -> encoder.matches(userAccountDto.getPassword(), u.getPassword()))	// 암호화된 비밀번호와 비교하도록 수정
                 .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 일치하지 않습니다."));
 
-
         return objectMapper.convertValue(userEntity, User.class);
     }
 

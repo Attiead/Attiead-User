@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum SecretStatus {
+public enum Visibilities {
     OPENED("0"),
     CLOSED("1");
 
