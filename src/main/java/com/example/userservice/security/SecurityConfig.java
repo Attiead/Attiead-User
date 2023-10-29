@@ -23,8 +23,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @RequiredArgsConstructor
 @Slf4j
 public class SecurityConfig {
-//    private final String[] allowedUrls = {"/api/v1/user/sign-in"};	// sign-up, sign-in 추가
-
     private final UserDetailsService userDetailsService;
 
     @Bean

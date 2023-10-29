@@ -25,8 +25,8 @@ public class UserController {
     }
 
     @GetMapping("/test")
-    public String test() {
-        return "User 서비스의 기본 test ";
+    public ResponseDto test() {
+        return ResponseDto.success("User 서비스의 기본 test ");
     }
 }
 

@@ -6,8 +6,10 @@ import com.example.userservice.common.mapper.UserEntityMapper;
 import com.example.userservice.domain.User;
 import com.example.userservice.exception.ExistUserException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
+@Component
 public class UserPersistenceAdapter implements UserRegistrationPort, CheckExistUserPort {
 
     private final UserRepository userRepository;

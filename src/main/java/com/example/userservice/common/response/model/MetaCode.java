@@ -25,7 +25,7 @@ public enum MetaCode {
     SERVICE_UNAVAILABLE("50300000");
 
     public static final String DEFAULT_META_CODE = "00000";
-    private final String code;
+    public final String code;
 
     public static MetaCode valueFrom(HttpStatus status) {
         return switch (status) {
@@ -42,4 +42,5 @@ public enum MetaCode {
             default -> throw new IllegalArgumentException("Please provide correct status.");
         };
     }
+
 }
