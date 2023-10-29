@@ -19,7 +19,7 @@ public class UserPersistenceAdapter implements UserRegistrationPort, CheckExistU
         UserEntity userEntity = UserEntityMapper.INSTANCE.toUserEntity(user);
         UserEntity savedUserEntity = userRepository.save(userEntity);
 
-        return UserEntityMapper.INSTANCE.toUserDomain(savedUserEntity);
+        return UserEntityMapper.INSTANCE.toUserDomainEntity(savedUserEntity);
     }
 
     @Override

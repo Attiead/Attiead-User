@@ -14,7 +14,7 @@ public interface UserEntityMapper {
 
     UserEntityMapper INSTANCE = Mappers.getMapper(UserEntityMapper.class);
 
-    User toUserDomain(UserEntity userEntity);
+    User toUserDomainEntity(UserEntity userEntity);
 
     @Mapping(target = "uid", ignore = true)
     @Mapping(target = "grade", source = "grade", defaultValue = "BRONZE")

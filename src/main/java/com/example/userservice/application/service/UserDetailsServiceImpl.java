@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public CustomUserDetails loadUserByUsername(String userEmail) {
         return new CustomUserDetails(
-                UserEntityMapper.INSTANCE.toUserDomain(userRepository.findByEmail(userEmail)
+                UserEntityMapper.INSTANCE.toUserDomainEntity(userRepository.findByEmail(userEmail)
                         .orElseThrow(() -> new UserNotFoundException("존재하지 않는 이용자 입니다. 이용자명 : " + userEmail))));
     }
 }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionAdviceHandler {
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ResponseDto<Object>> bindException(BindException e, HttpServletRequest request) {
-        log.warn("BindException 발생!! url:{}, trace:{}",request.getRequestURI(), e.getStackTrace());
+        log.error("BindException 발생!! trace:{}", e.getStackTrace());
         return createErrorResponse(HttpStatus.BAD_REQUEST, e.getFieldError().getDefaultMessage(), null);
     }
 
