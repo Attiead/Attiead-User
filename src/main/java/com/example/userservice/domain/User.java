@@ -16,7 +16,6 @@ public class User {
     private String password;
     private UserGrade grade;
     private UserStatus status;
-    private UserRole role;
     private String name;
     private String nickname;
     private String biography;

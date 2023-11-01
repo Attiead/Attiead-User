@@ -19,7 +19,6 @@ public interface UserEntityMapper {
     @Mapping(target = "uid", ignore = true)
     @Mapping(target = "grade", source = "grade", defaultValue = "BRONZE")
     @Mapping(target = "status", source = "status", defaultValue = "ACTIVE")
-    @Mapping(target = "role", source = "role", defaultValue = "STUDENT")
     @Mapping(target = "visibility", source = "visibility", defaultValue = "OPENED")
     UserEntity toUserEntity(User user);
 

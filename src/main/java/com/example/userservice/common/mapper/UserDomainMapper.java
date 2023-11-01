@@ -4,6 +4,7 @@ import com.example.userservice.application.port.in.dto.RequestUserDto;
 import com.example.userservice.application.port.in.dto.ResponseUserDto;
 import com.example.userservice.domain.User;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(
@@ -15,6 +16,7 @@ public interface UserDomainMapper {
 
     ResponseUserDto toResponseUserDto(User user);
 
+    @Mapping(target = "uid", ignore = true)
     User toUserDomain(RequestUserDto requestUserDto);
 
 }

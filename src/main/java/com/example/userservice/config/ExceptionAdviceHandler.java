@@ -7,6 +7,7 @@ import com.example.userservice.exception.BaseHttpException;
 import com.example.userservice.exception.ConflictException;
 import com.example.userservice.exception.InternalServerException;
 import jakarta.servlet.http.HttpServletRequest;
+import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionAdviceHandler {
     @ExceptionHandler(BindException.class)
     public ResponseEntity<ResponseDto<Object>> bindException(BindException e, HttpServletRequest request) {
-        log.error("BindException 발생!! trace:{}", e.getStackTrace());
-        return createErrorResponse(HttpStatus.BAD_REQUEST, e.getFieldError().getDefaultMessage(), null);
+        log.error("BindException 발생!! trace:{}", (Object) e.getStackTrace());
+        return createErrorResponse(HttpStatus.BAD_REQUEST, Objects.requireNonNull(e.getFieldError())
+            .getDefaultMessage(), null);
     }
 
     @ExceptionHandler(
