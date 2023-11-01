@@ -3,7 +3,6 @@ package com.example.userservice.adapter.out.persistence;
 import com.example.userservice.common.response.model.BaseEntity;
 import com.example.userservice.domain.Visibilities;
 import com.example.userservice.domain.UserGrade;
-import com.example.userservice.domain.UserRole;
 import com.example.userservice.domain.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,10 +33,6 @@ public class UserEntity extends BaseEntity {
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     @Builder.Default private UserStatus status = UserStatus.ACTIVE;
-
-    @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
-    @Builder.Default private UserRole role = UserRole.STUDENT;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
