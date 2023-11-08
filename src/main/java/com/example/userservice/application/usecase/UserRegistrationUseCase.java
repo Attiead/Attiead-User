@@ -5,5 +5,5 @@ import com.example.userservice.application.port.in.dto.ResponseUserDto;
 
 public interface UserRegistrationUseCase {
 
-    ResponseUserDto register(RequestUserDto userDto);
+  ResponseUserDto register(RequestUserDto userDto);
 }

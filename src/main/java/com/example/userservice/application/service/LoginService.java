@@ -5,7 +5,6 @@ import com.example.userservice.adapter.out.persistence.UserRepository;
 import com.example.userservice.application.port.in.dto.UserAccountDto;
 import com.example.userservice.application.usecase.LoginUseCase;
 import com.example.userservice.domain.User;
-import com.example.userservice.security.TokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,17 +15,18 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class LoginService implements LoginUseCase {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder encoder;	// 추가
-    private final ObjectMapper objectMapper;
+  private final UserRepository userRepository;
+  private final PasswordEncoder encoder;  // 추가
+  private final ObjectMapper objectMapper;
 
-    @Override
-    public User login(UserAccountDto userAccountDto) {
-        UserEntity userEntity = userRepository.findByEmail(userAccountDto.getEmail())
-                .filter(u -> encoder.matches(userAccountDto.getPassword(), u.getPassword()))	// 암호화된 비밀번호와 비교하도록 수정
-                .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 일치하지 않습니다."));
+  @Override
+  public User login(UserAccountDto userAccountDto) {
+    UserEntity userEntity = userRepository.findByEmail(userAccountDto.getEmail())
+        .filter(u -> encoder.matches(userAccountDto.getPassword(),
+            u.getPassword()))  // 암호화된 비밀번호와 비교하도록 수정
+        .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 일치하지 않습니다."));
 
-        return objectMapper.convertValue(userEntity, User.class);
-    }
+    return objectMapper.convertValue(userEntity, User.class);
+  }
 
 }

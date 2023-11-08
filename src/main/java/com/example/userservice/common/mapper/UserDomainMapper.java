@@ -12,11 +12,11 @@ import org.mapstruct.factory.Mappers;
 )
 public interface UserDomainMapper {
 
-    UserDomainMapper INSTANCE = Mappers.getMapper(UserDomainMapper.class);
+  UserDomainMapper INSTANCE = Mappers.getMapper(UserDomainMapper.class);
 
-    ResponseUserDto toResponseUserDto(User user);
+  ResponseUserDto toResponseUserDto(User user);
 
-    @Mapping(target = "uid", ignore = true)
-    User toUserDomain(RequestUserDto requestUserDto);
+  @Mapping(target = "uid", ignore = true)
+  User toUserDomain(RequestUserDto requestUserDto);
 
 }

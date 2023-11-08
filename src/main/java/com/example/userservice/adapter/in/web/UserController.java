@@ -17,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/user")
 public class UserController {
 
-    private final UserRegistrationUseCase userRegistrationUseCase;
+  private final UserRegistrationUseCase userRegistrationUseCase;
 
-    @PostMapping("/sign-up")
-    public ResponseDto<ResponseUserDto> signUp(@Valid @RequestBody RequestUserDto userDto) {
-        return ResponseDto.success(userRegistrationUseCase.register(userDto));
-    }
+  @PostMapping("/sign-up")
+  public ResponseDto<ResponseUserDto> signUp(@Valid @RequestBody RequestUserDto userDto) {
+    return ResponseDto.success(userRegistrationUseCase.register(userDto));
+  }
 
-    @GetMapping("/test")
-    public ResponseDto test() {
-        return ResponseDto.success("User 서비스의 기본 test ");
-    }
+  @GetMapping("/test")
+  public ResponseDto test() {
+    return ResponseDto.success("User 서비스의 기본 test ");
+  }
 }
 

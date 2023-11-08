@@ -5,6 +5,7 @@ import com.example.userservice.domain.User;
 
 
 public interface LoginUseCase {
-    User login(UserAccountDto userAccountDto);
+
+  User login(UserAccountDto userAccountDto);
 
 }

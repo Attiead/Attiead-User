@@ -6,9 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum UserGrade {
-    GOLD("2"),
-    SILVER("1"),
-    BRONZE("0");
+  GOLD("2"),
+  SILVER("1"),
+  BRONZE("0");
 
-    private final String grade;
+  private final String grade;
 }

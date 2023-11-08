@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserRegistrationService implements UserRegistrationUseCase {
 
-    private UserPersistenceAdapter userPersistenceAdapter;
+  private UserPersistenceAdapter userPersistenceAdapter;
 
-    @Override
-    public ResponseUserDto register(RequestUserDto userDto) {
-        userPersistenceAdapter.checkExistUser(userDto.getEmail());
+  @Override
+  public ResponseUserDto register(RequestUserDto userDto) {
+    userPersistenceAdapter.checkExistUser(userDto.getEmail());
 
-        User user = UserDomainMapper.INSTANCE.toUserDomain(userDto);
-        User savedUser = userPersistenceAdapter.register(user);
+    User user = UserDomainMapper.INSTANCE.toUserDomain(userDto);
+    User savedUser = userPersistenceAdapter.register(user);
 
-        return UserDomainMapper.INSTANCE.toResponseUserDto(savedUser);
-    }
+    return UserDomainMapper.INSTANCE.toResponseUserDto(savedUser);
+  }
 }
