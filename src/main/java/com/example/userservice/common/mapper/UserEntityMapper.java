@@ -12,18 +12,19 @@ import org.mapstruct.factory.Mappers;
 )
 public interface UserEntityMapper {
 
-    UserEntityMapper INSTANCE = Mappers.getMapper(UserEntityMapper.class);
+  UserEntityMapper INSTANCE = Mappers.getMapper(UserEntityMapper.class);
 
-    User toUserDomainEntity(UserEntity userEntity);
+  User toUserDomainEntity(UserEntity userEntity);
 
-    @Mapping(target = "uid", ignore = true)
-    @Mapping(target = "grade", source = "grade", defaultValue = "BRONZE")
-    @Mapping(target = "status", source = "status", defaultValue = "ACTIVE")
-    @Mapping(target = "visibility", source = "visibility", defaultValue = "OPENED")
-    UserEntity toUserEntity(User user);
+  @Mapping(target = "uid", ignore = true)
+  @Mapping(target = "grade", source = "grade", defaultValue = "BRONZE")
+  @Mapping(target = "status", source = "status", defaultValue = "ACTIVE")
+  @Mapping(target = "role", source = "role", defaultValue = "USER")
+  @Mapping(target = "visibility", source = "visibility", defaultValue = "OPENED")
+  UserEntity toUserEntity(User user);
 
-    default UUID generateDefaultUUID(UUID value) {
-        return value != null ? value : UUID.randomUUID();
-    }
+  default UUID generateDefaultUuid(UUID value) {
+    return value != null ? value : UUID.randomUUID();
+  }
 
 }

@@ -6,8 +6,8 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Visibilities {
-    OPENED("0"),
-    CLOSED("1");
+  OPENED("0"),
+  CLOSED("1");
 
-    private final String status;
+  private final String status;
 }

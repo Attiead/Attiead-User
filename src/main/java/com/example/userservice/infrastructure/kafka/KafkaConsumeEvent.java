@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class KafkaConsumeEvent {
 
-    private String title;
-    private String content;
+  private String title;
+  private String content;
 }

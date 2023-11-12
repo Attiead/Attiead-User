@@ -9,19 +9,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Meta {
-    private MetaCode type;
-    private String code;
-    private String message;
 
-    public Meta(MetaCode metaCode) {
-        this.type = metaCode;
-        this.code = metaCode.code;
-        this.message = null;
-    }
+  private MetaCode type;
+  private String code;
+  private String message;
 
-    public Meta(MetaCode metaCode, String code, String message) {
-        this.type = metaCode;
-        this.code = code;
-        this.message = message;
-    }
+  public Meta(MetaCode metaCode) {
+    this.type = metaCode;
+    this.code = metaCode.code;
+    this.message = null;
+  }
+
+  public Meta(MetaCode metaCode, String code, String message) {
+    this.type = metaCode;
+    this.code = code;
+    this.message = message;
+  }
 }
