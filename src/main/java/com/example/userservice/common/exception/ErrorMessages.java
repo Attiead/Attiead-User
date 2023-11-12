@@ -3,7 +3,7 @@ package com.example.userservice.common.exception;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public enum ErrorMessage {
+public enum ErrorMessages {
 
   USERINFONOTMATCH("로그인에 필요한 정보를 잘못 입력하셨습니다"),
   USERNOTFOUND("존재하지 않는 이용자 입니다. 이용자명 : "),
