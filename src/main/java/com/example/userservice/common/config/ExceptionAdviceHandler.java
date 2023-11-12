@@ -23,7 +23,6 @@ public class ExceptionAdviceHandler {
   public ResponseEntity<ResponseDto<Object>> bindException(
       BindException e, HttpServletRequest request) {
 
-    log.error("BindException 발생!! trace:{}", (Object) e.getStackTrace());
     return createErrorResponse(HttpStatus.BAD_REQUEST, Objects.requireNonNull(e.getFieldError())
         .getDefaultMessage(), null);
   }

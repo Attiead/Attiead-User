@@ -12,7 +12,7 @@ public enum ErrorMessage {
 
   ;
 
-  public final String msg;
+  public final String message;
 
 
 }

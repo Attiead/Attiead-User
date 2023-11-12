@@ -28,7 +28,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
           UserAccountDto.class);
       authRequest = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
     } catch (IOException exception) {
-      throw new UsernameNotFoundException(ErrorMessage.USERINFONOTMATCH.msg);
+      throw new UsernameNotFoundException(ErrorMessage.USERINFONOTMATCH.message);
     }
 
     setDetails(request, authRequest);

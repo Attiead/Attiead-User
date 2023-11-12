@@ -25,7 +25,7 @@ public class LoginService implements LoginUseCase {
     UserEntity userEntity = userRepository.findByEmail(userAccountDto.getEmail())
         .filter(u -> encoder.matches(userAccountDto.getPassword(),
             u.getPassword()))  // 암호화된 비밀번호와 비교하도록 수정
-        .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.IDANDPWNOTMATCH.msg));
+        .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.IDANDPWNOTMATCH.message));
 
     return objectMapper.convertValue(userEntity, User.class);
   }

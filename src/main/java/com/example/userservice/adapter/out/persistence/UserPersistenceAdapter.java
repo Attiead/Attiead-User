@@ -26,7 +26,7 @@ public class UserPersistenceAdapter implements UserRegistrationPort, CheckExistU
   @Override
   public void checkExistUser(String userEmail) {
     if (userRepository.existsByEmail(userEmail)) {
-      throw new ExistUserException(ErrorMessage.EXISTUSER.msg);
+      throw new ExistUserException(ErrorMessage.EXISTUSER.message);
     }
   }
 }
