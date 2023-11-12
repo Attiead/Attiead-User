@@ -1,6 +1,7 @@
 package com.example.userservice.application.service;
 
 import com.example.userservice.adapter.out.persistence.UserRepository;
+import com.example.userservice.common.exception.ErrorMessage;
 import com.example.userservice.common.mapper.UserEntityMapper;
 import com.example.userservice.common.security.CustomUserDetails;
 import com.example.userservice.common.exception.UserNotFoundException;
@@ -19,6 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   public CustomUserDetails loadUserByUsername(String userEmail) {
     return new CustomUserDetails(
         UserEntityMapper.INSTANCE.toUserDomainEntity(userRepository.findByEmail(userEmail)
-            .orElseThrow(() -> new UserNotFoundException("존재하지 않는 이용자 입니다. 이용자명 : " + userEmail))));
+            .orElseThrow(() -> new UserNotFoundException(ErrorMessage.USERNOTFOUND.msg + userEmail))));
   }
 }

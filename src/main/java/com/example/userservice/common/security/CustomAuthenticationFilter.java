@@ -1,6 +1,7 @@
 package com.example.userservice.common.security;
 
 import com.example.userservice.application.port.in.dto.UserAccountDto;
+import com.example.userservice.common.exception.ErrorMessage;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,7 +28,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
           UserAccountDto.class);
       authRequest = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword());
     } catch (IOException exception) {
-      throw new UsernameNotFoundException("로그인에 필요한 정보를 잘못 입력하셨습니다");
+      throw new UsernameNotFoundException(ErrorMessage.USERINFONOTMATCH.msg);
     }
 
     setDetails(request, authRequest);

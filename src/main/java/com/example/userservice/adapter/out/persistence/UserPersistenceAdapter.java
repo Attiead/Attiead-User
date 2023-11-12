@@ -2,6 +2,7 @@ package com.example.userservice.adapter.out.persistence;
 
 import com.example.userservice.application.port.out.CheckExistUserPort;
 import com.example.userservice.application.port.out.UserRegistrationPort;
+import com.example.userservice.common.exception.ErrorMessage;
 import com.example.userservice.common.mapper.UserEntityMapper;
 import com.example.userservice.domain.User;
 import com.example.userservice.common.exception.ExistUserException;
@@ -25,7 +26,7 @@ public class UserPersistenceAdapter implements UserRegistrationPort, CheckExistU
   @Override
   public void checkExistUser(String userEmail) {
     if (userRepository.existsByEmail(userEmail)) {
-      throw new ExistUserException("이미 사용 중인 이메일 입니다.");
+      throw new ExistUserException(ErrorMessage.EXISTUSER.msg);
     }
   }
 }
