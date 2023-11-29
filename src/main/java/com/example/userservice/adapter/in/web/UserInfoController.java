@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Validated
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
 public class UserInfoController {
@@ -29,12 +31,12 @@ public class UserInfoController {
   ) {
     Pageable pageable = PageRequest.of(page, pageSize);
 
-    return PageResponseDto.success(loadUserUseCase.loadAllUsers(pageable));
+    return PageResponseDto.success(loadUserUseCase.getAllUsers(pageable));
   }
 
   @GetMapping("/{uid}")
   public ResponseDto<ResponseUserDto> getUserInfo(@PathVariable Long uid) {
-    return ResponseDto.success(loadUserUseCase.loadUser(uid));
+    return ResponseDto.success(loadUserUseCase.getUser(uid));
   }
 }
 

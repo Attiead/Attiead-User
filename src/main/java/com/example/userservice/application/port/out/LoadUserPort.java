@@ -4,6 +4,6 @@ import com.example.userservice.domain.User;
 
 public interface LoadUserPort {
 
-  User loadUser(Long uid);
+  User getUser(Long uid);
 
 }

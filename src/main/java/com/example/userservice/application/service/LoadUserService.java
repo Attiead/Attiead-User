@@ -17,15 +17,15 @@ public class LoadUserService implements LoadUserUseCase {
   private UserPersistenceAdapter userPersistenceAdapter;
 
   @Override
-  public Page<ResponseUserDto> loadAllUsers(Pageable pageable) {
-    Page<User> savedUsers = userPersistenceAdapter.loadAllUsers(pageable);
+  public Page<ResponseUserDto> getAllUsers(Pageable pageable) {
+    Page<User> savedUsers = userPersistenceAdapter.getAllUsers(pageable);
 
     return savedUsers.map(UserDomainMapper.INSTANCE::toResponseUserDto);
   }
 
   @Override
-  public ResponseUserDto loadUser(Long uid) {
-    User savedUser = userPersistenceAdapter.loadUser(uid);
+  public ResponseUserDto getUser(Long uid) {
+    User savedUser = userPersistenceAdapter.getUser(uid);
 
     return UserDomainMapper.INSTANCE.toResponseUserDto(savedUser);
   }

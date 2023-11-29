@@ -6,6 +6,6 @@ import org.springframework.data.domain.Pageable;
 
 public interface LoadAllUsersPort {
 
-  Page<User> loadAllUsers(Pageable pageable);
+  Page<User> getAllUsers(Pageable pageable);
 
 }

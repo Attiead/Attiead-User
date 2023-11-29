@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface LoadUserUseCase {
 
-  ResponseUserDto loadUser(Long uid);
+  ResponseUserDto getUser(Long uid);
 
-  Page<ResponseUserDto> loadAllUsers(Pageable pageable);
+  Page<ResponseUserDto> getAllUsers(Pageable pageable);
 }

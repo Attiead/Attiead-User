@@ -37,14 +37,14 @@ public class UserPersistenceAdapter
   }
 
   @Override
-  public Page<User> loadAllUsers(Pageable pageable) {
+  public Page<User> getAllUsers(Pageable pageable) {
     Page<UserEntity> savedUserEntities = userRepository.findAll(pageable);
 
     return savedUserEntities.map(UserEntityMapper.INSTANCE::toUserDomainEntity);
   }
 
   @Override
-  public User loadUser(Long uid) {
+  public User getUser(Long uid) {
     UserEntity savedUserEntity = userRepository.findById(uid)
         .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
 
