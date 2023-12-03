@@ -18,7 +18,7 @@ public class TokenProvider {
   @Value("${security.jwt.expired}")
   private static long jwtExpired;
 
-  public static String createToken(UUID uid) {
+  public static String createToken(String uid) {
 
     Instant issueAt = Instant.now();
 
@@ -29,7 +29,7 @@ public class TokenProvider {
 
     // Prepare the signing key
     SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
-    Key signingKey = Keys.hmacShaKeyFor(uid.toString().getBytes());
+    Key signingKey = Keys.hmacShaKeyFor(uid.getBytes());
 
     // Sign and build the JWT
     return jwtBuilder

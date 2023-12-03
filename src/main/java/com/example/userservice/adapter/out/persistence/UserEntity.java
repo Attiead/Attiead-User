@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserEntity extends BaseEntity {
 
-  @Column(name = "uid", nullable = false)
+  @Column(name = "uid", nullable = false, length = 36)
   @Builder.Default
   private String uid = UUID.randomUUID().toString();
 
