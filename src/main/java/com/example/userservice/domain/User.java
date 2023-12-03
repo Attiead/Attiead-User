@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class User {
 
-  private UUID uid;
+  private String uid;
   private String email;
   private String password;
   private UserGrade grade;

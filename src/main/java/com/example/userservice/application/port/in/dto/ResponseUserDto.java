@@ -12,7 +12,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ResponseUserDto {
 
-  private UUID uid;
+  private String uid;
   private String email;
   private String password;
   private UserGrade grade;

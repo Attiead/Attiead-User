@@ -7,7 +7,9 @@ import com.example.userservice.common.exception.BaseHttpException;
 import com.example.userservice.common.exception.ConflictException;
 import com.example.userservice.common.exception.InternalServerException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import java.util.Objects;
+import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +27,27 @@ public class ExceptionAdviceHandler {
 
     return createErrorResponse(HttpStatus.BAD_REQUEST, Objects.requireNonNull(e.getFieldError())
         .getDefaultMessage(), null);
+  }
+
+  @ExceptionHandler(ConstraintViolationException.class)
+  public ResponseEntity<ResponseDto<Object>> constraintValidationException(
+      ConstraintViolationException e, HttpServletRequest request) {
+
+    Stream<Object> errorStream = e.getConstraintViolations().stream().map(m -> {
+
+      StringBuilder errorMessage = new StringBuilder();
+      String methodAndFieldName = String.valueOf(m.getPropertyPath());
+      int indexOfDot = methodAndFieldName.indexOf(".");
+      String fieldName = methodAndFieldName.substring(indexOfDot + 1);
+
+      String validationMessage = m.getMessage();
+
+      return errorMessage.append(fieldName).append(" : ").append(validationMessage);
+    });
+
+    String errorMessage = errorStream.findFirst().orElse("").toString();
+
+    return createErrorResponse(HttpStatus.BAD_REQUEST, errorMessage, null);
   }
 
   @ExceptionHandler({InternalServerException.class})
