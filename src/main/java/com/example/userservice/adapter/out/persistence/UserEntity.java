@@ -26,7 +26,7 @@ public class UserEntity extends BaseEntity {
 
   @Column(name = "uid", nullable = false)
   @Builder.Default
-  private UUID uid = UUID.randomUUID();
+  private String uid = UUID.randomUUID().toString();
 
   @Column(name = "email", nullable = false, length = 100, unique = true)
   private String email;

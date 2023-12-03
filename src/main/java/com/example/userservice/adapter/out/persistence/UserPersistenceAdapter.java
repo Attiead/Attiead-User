@@ -44,8 +44,8 @@ public class UserPersistenceAdapter
   }
 
   @Override
-  public User getUser(Long uid) {
-    UserEntity savedUserEntity = userRepository.findById(uid)
+  public User getUser(String uid) {
+    UserEntity savedUserEntity = userRepository.findByUid(uid)
         .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
 
     return UserEntityMapper.INSTANCE.toUserDomainEntity(savedUserEntity);

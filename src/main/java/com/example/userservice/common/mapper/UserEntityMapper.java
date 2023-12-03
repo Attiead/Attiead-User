@@ -23,8 +23,8 @@ public interface UserEntityMapper {
   @Mapping(target = "visibility", source = "visibility", defaultValue = "OPENED")
   UserEntity toUserEntity(User user);
 
-  default UUID generateDefaultUuid(UUID value) {
-    return value != null ? value : UUID.randomUUID();
+  default String generateDefaultUuid(String value) {
+    return value != null ? value : UUID.randomUUID().toString();
   }
 
 }

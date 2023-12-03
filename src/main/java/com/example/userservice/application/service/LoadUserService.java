@@ -24,7 +24,7 @@ public class LoadUserService implements LoadUserUseCase {
   }
 
   @Override
-  public ResponseUserDto getUser(Long uid) {
+  public ResponseUserDto getUser(String uid) {
     User savedUser = userPersistenceAdapter.getUser(uid);
 
     return UserDomainMapper.INSTANCE.toResponseUserDto(savedUser);

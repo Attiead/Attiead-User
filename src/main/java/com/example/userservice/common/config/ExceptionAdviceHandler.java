@@ -9,7 +9,6 @@ import com.example.userservice.common.exception.InternalServerException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -35,15 +34,15 @@ public class ExceptionAdviceHandler {
       ConstraintViolationException e, HttpServletRequest request) {
 
     Stream<Object> errorStream = e.getConstraintViolations().stream().map(m -> {
+
+      StringBuilder errorMessage = new StringBuilder();
       String methodAndFieldName = String.valueOf(m.getPropertyPath());
       int indexOfDot = methodAndFieldName.indexOf(".");
       String fieldName = methodAndFieldName.substring(indexOfDot + 1);
 
       String validationMessage = m.getMessage();
-      AtomicReference<String> streamErrorMessage = new AtomicReference<>("");
 
-      streamErrorMessage.set(fieldName + " : " + validationMessage);
-      return streamErrorMessage;
+      return errorMessage.append(fieldName).append(" : ").append(validationMessage);
     });
 
     String errorMessage = errorStream.findFirst().orElse("").toString();

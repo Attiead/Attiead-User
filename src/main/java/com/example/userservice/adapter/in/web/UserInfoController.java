@@ -35,7 +35,7 @@ public class UserInfoController {
   }
 
   @GetMapping("/{uid}")
-  public ResponseDto<ResponseUserDto> getUserInfo(@PathVariable Long uid) {
+  public ResponseDto<ResponseUserDto> getUserInfo(@PathVariable String uid) {
     return ResponseDto.success(loadUserUseCase.getUser(uid));
   }
 }
