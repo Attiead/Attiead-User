@@ -3,6 +3,7 @@ package com.example.userservice.adapter.out.persistence;
 import com.example.userservice.application.port.out.CheckExistUserPort;
 import com.example.userservice.application.port.out.LoadAllUsersPort;
 import com.example.userservice.application.port.out.LoadUserPort;
+import com.example.userservice.application.port.out.UpdateUserPort;
 import com.example.userservice.application.port.out.UserRegistrationPort;
 import com.example.userservice.common.exception.ErrorMessages;
 import com.example.userservice.common.exception.UserNotFoundException;
@@ -17,7 +18,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class UserPersistenceAdapter
-    implements UserRegistrationPort, CheckExistUserPort, LoadAllUsersPort, LoadUserPort {
+    implements UserRegistrationPort, CheckExistUserPort, LoadAllUsersPort, LoadUserPort,
+    UpdateUserPort {
 
   private final UserRepository userRepository;
 
@@ -47,6 +49,16 @@ public class UserPersistenceAdapter
   public User getUser(String uid) {
     UserEntity savedUserEntity = userRepository.findByUid(uid)
         .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
+
+    return UserEntityMapper.INSTANCE.toUserDomainEntity(savedUserEntity);
+  }
+
+  @Override
+  public User update(User user) {
+    UserEntity savedUserEntity = userRepository.findByUid(user.getUid())
+        .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
+
+    savedUserEntity.updateUser(user);
 
     return UserEntityMapper.INSTANCE.toUserDomainEntity(savedUserEntity);
   }

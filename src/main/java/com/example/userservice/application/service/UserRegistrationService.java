@@ -19,7 +19,7 @@ public class UserRegistrationService implements UserRegistrationUseCase {
   public ResponseUserDto register(RequestUserDto userDto) {
     userPersistenceAdapter.checkExistUser(userDto.getEmail());
 
-    User user = UserDomainMapper.INSTANCE.toUserDomain(userDto);
+    User user = UserDomainMapper.INSTANCE.requestUserDtoToUserDomain(userDto);
     User savedUser = userPersistenceAdapter.register(user);
 
     return UserDomainMapper.INSTANCE.toResponseUserDto(savedUser);
