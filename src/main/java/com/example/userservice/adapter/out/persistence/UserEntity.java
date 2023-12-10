@@ -1,6 +1,7 @@
 package com.example.userservice.adapter.out.persistence;
 
 import com.example.userservice.common.response.model.BaseEntity;
+import com.example.userservice.domain.User;
 import com.example.userservice.domain.UserRole;
 import com.example.userservice.domain.Visibilities;
 import com.example.userservice.domain.UserGrade;
@@ -62,4 +63,15 @@ public class UserEntity extends BaseEntity {
   @Enumerated(EnumType.STRING)
   @Builder.Default
   private Visibilities visibility = Visibilities.OPENED;
+
+  public void update(User updatedUser) {
+    this.password = updatedUser.getPassword();
+    this.grade = updatedUser.getGrade();
+    this.role = updatedUser.getRole();
+    this.name = updatedUser.getName();
+    this.nickname = updatedUser.getNickname();
+    this.status = updatedUser.getStatus();
+    this.biography = updatedUser.getBiography();
+    this.visibility = updatedUser.getVisibility();
+  }
 }

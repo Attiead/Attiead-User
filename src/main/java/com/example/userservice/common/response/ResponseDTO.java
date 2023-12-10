@@ -6,25 +6,25 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ResponseDto<T> {
+public class ResponseDTO<T> {
 
   private final T data;
   private final Meta meta;
 
-  public ResponseDto(Meta meta, T data) {
+  public ResponseDTO(Meta meta, T data) {
     this.meta = meta;
     this.data = data;
   }
 
-  public static <T> ResponseDto<T> success(Meta meta, T data) {
-    return new ResponseDto<>(meta, data);
+  public static <T> ResponseDTO<T> success(Meta meta, T data) {
+    return new ResponseDTO<>(meta, data);
   }
 
-  public static <T> ResponseDto<T> success(MetaCode metaCode, T data) {
+  public static <T> ResponseDTO<T> success(MetaCode metaCode, T data) {
     return success(new Meta(metaCode), data);
   }
 
-  public static <T> ResponseDto<T> success(T data) {
+  public static <T> ResponseDTO<T> success(T data) {
     return success(MetaCode.SUCCESS, data);
   }
 }

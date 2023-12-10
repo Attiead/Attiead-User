@@ -1,9 +1,9 @@
 package com.example.userservice.adapter.in.web;
 
-import com.example.userservice.application.port.in.dto.RequestUserDto;
-import com.example.userservice.application.port.in.dto.ResponseUserDto;
+import com.example.userservice.application.port.in.dto.RequestUserDTO;
+import com.example.userservice.application.port.in.dto.ResponseUserDTO;
 import com.example.userservice.application.usecase.UserRegistrationUseCase;
-import com.example.userservice.common.response.ResponseDto;
+import com.example.userservice.common.response.ResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +20,13 @@ public class UserCreateController {
   private final UserRegistrationUseCase userRegistrationUseCase;
 
   @PostMapping("/sign-up")
-  public ResponseDto<ResponseUserDto> signUp(@Valid @RequestBody RequestUserDto userDto) {
-    return ResponseDto.success(userRegistrationUseCase.register(userDto));
+  public ResponseDTO<ResponseUserDTO> signUp(@Valid @RequestBody RequestUserDTO userDTO) {
+    return ResponseDTO.success(userRegistrationUseCase.register(userDTO));
   }
 
   @GetMapping("/test")
-  public ResponseDto test() {
-    return ResponseDto.success("User 서비스의 기본 test ");
+  public ResponseDTO test() {
+    return ResponseDTO.success("User 서비스의 기본 test ");
   }
 }
 

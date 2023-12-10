@@ -1,7 +1,8 @@
 package com.example.userservice.common.mapper;
 
-import com.example.userservice.application.port.in.dto.RequestUserDto;
-import com.example.userservice.application.port.in.dto.ResponseUserDto;
+import com.example.userservice.application.port.in.dto.RequestUpdateUserDTO;
+import com.example.userservice.application.port.in.dto.RequestUserDTO;
+import com.example.userservice.application.port.in.dto.ResponseUserDTO;
 import com.example.userservice.domain.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,9 +15,12 @@ public interface UserDomainMapper {
 
   UserDomainMapper INSTANCE = Mappers.getMapper(UserDomainMapper.class);
 
-  ResponseUserDto toResponseUserDto(User user);
+  ResponseUserDTO toResponseUserDTO(User user);
 
   @Mapping(target = "uid", ignore = true)
-  User toUserDomain(RequestUserDto requestUserDto);
+  User toUserDomain(RequestUserDTO requestUserDTO);
+
+  User toUserDomain(RequestUpdateUserDTO requestUpdateUserDTO);
 
 }
+

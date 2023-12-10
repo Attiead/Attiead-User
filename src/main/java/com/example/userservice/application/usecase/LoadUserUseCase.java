@@ -1,12 +1,12 @@
 package com.example.userservice.application.usecase;
 
-import com.example.userservice.application.port.in.dto.ResponseUserDto;
+import com.example.userservice.application.port.in.dto.ResponseUserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface LoadUserUseCase {
 
-  ResponseUserDto getUser(String uid);
+  ResponseUserDTO getUser(String uid);
 
-  Page<ResponseUserDto> getAllUsers(Pageable pageable);
+  Page<ResponseUserDTO> getAllUsers(Pageable pageable);
 }

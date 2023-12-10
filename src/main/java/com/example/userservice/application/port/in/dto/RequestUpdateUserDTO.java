@@ -4,16 +4,16 @@ import com.example.userservice.domain.UserGrade;
 import com.example.userservice.domain.UserRole;
 import com.example.userservice.domain.UserStatus;
 import com.example.userservice.domain.Visibilities;
-import java.util.UUID;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ResponseUserDto {
+public class RequestUpdateUserDTO {
 
+  @NotBlank(message = "uid는 필수 값입니다.")
   private String uid;
-  private String email;
   private String password;
   private UserGrade grade;
   private UserStatus status;
