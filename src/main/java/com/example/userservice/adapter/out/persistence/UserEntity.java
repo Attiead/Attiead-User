@@ -64,7 +64,7 @@ public class UserEntity extends BaseEntity {
   @Builder.Default
   private Visibilities visibility = Visibilities.OPENED;
 
-  public void updateUser(User updatedUser) {
+  public void update(User updatedUser) {
     this.password = updatedUser.getPassword();
     this.grade = updatedUser.getGrade();
     this.role = updatedUser.getRole();

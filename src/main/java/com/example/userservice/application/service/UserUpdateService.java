@@ -1,8 +1,8 @@
 package com.example.userservice.application.service;
 
 import com.example.userservice.adapter.out.persistence.UserPersistenceAdapter;
-import com.example.userservice.application.port.in.dto.RequestUpdateUserDto;
-import com.example.userservice.application.port.in.dto.ResponseUserDto;
+import com.example.userservice.application.port.in.dto.RequestUpdateUserDTO;
+import com.example.userservice.application.port.in.dto.ResponseUserDTO;
 import com.example.userservice.application.usecase.UpdateUserUseCase;
 import com.example.userservice.common.mapper.UserDomainMapper;
 import com.example.userservice.domain.User;
@@ -18,15 +18,10 @@ public class UserUpdateService implements UpdateUserUseCase {
 
   @Override
   @Transactional
-  public ResponseUserDto update(RequestUpdateUserDto requestUpdateUserDto) {
+  public ResponseUserDTO update(RequestUpdateUserDTO requestUpdateUserDTO) {
+    User requestUpdateUser = UserDomainMapper.INSTANCE.toUserDomain(requestUpdateUserDTO);
+    User savedUser = userPersistenceAdapter.update(requestUpdateUser);
 
-    User savedUser = userPersistenceAdapter.getUser(requestUpdateUserDto.getUid());
-    User requestUpdateUser = UserDomainMapper.INSTANCE.requestUpdateUserDtoToUserDomain(requestUpdateUserDto);
-
-    User returnUser = savedUser.isChangedUser(requestUpdateUser)
-        ? userPersistenceAdapter.update(requestUpdateUser)
-        : savedUser;
-
-    return UserDomainMapper.INSTANCE.toResponseUserDto(returnUser);
+    return UserDomainMapper.INSTANCE.toResponseUserDTO(savedUser);
   }
 }

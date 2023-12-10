@@ -58,7 +58,7 @@ public class UserPersistenceAdapter
     UserEntity savedUserEntity = userRepository.findByUid(user.getUid())
         .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
 
-    savedUserEntity.updateUser(user);
+    savedUserEntity.update(user);
 
     return UserEntityMapper.INSTANCE.toUserDomainEntity(savedUserEntity);
   }

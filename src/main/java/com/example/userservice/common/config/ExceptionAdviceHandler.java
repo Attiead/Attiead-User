@@ -1,7 +1,7 @@
 package com.example.userservice.common.config;
 
 import com.example.userservice.common.response.Meta;
-import com.example.userservice.common.response.ResponseDto;
+import com.example.userservice.common.response.ResponseDTO;
 import com.example.userservice.common.response.model.MetaCode;
 import com.example.userservice.common.exception.BaseHttpException;
 import com.example.userservice.common.exception.ConflictException;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionAdviceHandler {
 
   @ExceptionHandler(BindException.class)
-  public ResponseEntity<ResponseDto<Object>> bindException(
+  public ResponseEntity<ResponseDTO<Object>> bindException(
       BindException e, HttpServletRequest request) {
 
     return createErrorResponse(HttpStatus.BAD_REQUEST, Objects.requireNonNull(e.getFieldError())
@@ -30,7 +30,7 @@ public class ExceptionAdviceHandler {
   }
 
   @ExceptionHandler(ConstraintViolationException.class)
-  public ResponseEntity<ResponseDto<Object>> constraintValidationException(
+  public ResponseEntity<ResponseDTO<Object>> constraintValidationException(
       ConstraintViolationException e, HttpServletRequest request) {
 
     Stream<Object> errorStream = e.getConstraintViolations().stream().map(m -> {
@@ -51,7 +51,7 @@ public class ExceptionAdviceHandler {
   }
 
   @ExceptionHandler({InternalServerException.class})
-  public ResponseDto<Object> handleBaseHttpException(BaseHttpException error) {
+  public ResponseDTO<Object> handleBaseHttpException(BaseHttpException error) {
 
     HttpStatus status;
 
@@ -66,14 +66,14 @@ public class ExceptionAdviceHandler {
     return createErrorResponse(status, error.getMessage(), error.getData()).getBody();
   }
 
-  private ResponseEntity<ResponseDto<Object>> createErrorResponse(
+  private ResponseEntity<ResponseDTO<Object>> createErrorResponse(
       HttpStatus statusCode,
       String message,
       Object data
   ) {
     MetaCode dtoMetaCode = MetaCode.valueFrom(statusCode);
 
-    ResponseDto<Object> response = new ResponseDto<>(
+    ResponseDTO<Object> response = new ResponseDTO<>(
         new Meta(
             dtoMetaCode,
             dtoMetaCode.code,

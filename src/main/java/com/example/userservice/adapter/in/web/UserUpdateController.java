@@ -1,9 +1,9 @@
 package com.example.userservice.adapter.in.web;
 
-import com.example.userservice.application.port.in.dto.RequestUpdateUserDto;
-import com.example.userservice.application.port.in.dto.ResponseUserDto;
+import com.example.userservice.application.port.in.dto.RequestUpdateUserDTO;
+import com.example.userservice.application.port.in.dto.ResponseUserDTO;
 import com.example.userservice.application.usecase.UpdateUserUseCase;
-import com.example.userservice.common.response.ResponseDto;
+import com.example.userservice.common.response.ResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -21,9 +21,9 @@ public class UserUpdateController {
   private final UpdateUserUseCase updateUserUseCase;
 
   @PutMapping
-  public ResponseDto<ResponseUserDto> updateUserInfo(
-      @Valid @RequestBody RequestUpdateUserDto updateDto) {
-    return ResponseDto.success(updateUserUseCase.update(updateDto));
+  public ResponseDTO<ResponseUserDTO> updateUserInfo(
+      @Valid @RequestBody RequestUpdateUserDTO updateDTO) {
+    return ResponseDTO.success(updateUserUseCase.update(updateDTO));
   }
 }
 

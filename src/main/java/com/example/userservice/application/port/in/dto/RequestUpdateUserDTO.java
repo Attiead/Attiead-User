@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RequestUpdateUserDto {
+public class RequestUpdateUserDTO {
 
   @NotBlank(message = "uid는 필수 값입니다.")
   private String uid;

@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class RequestUserDto {
+public class RequestUserDTO {
 
   @Email(message = "이메일 형식이 맞지 않습니다.")
   private String email;

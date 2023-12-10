@@ -4,13 +4,12 @@ import com.example.userservice.domain.UserGrade;
 import com.example.userservice.domain.UserRole;
 import com.example.userservice.domain.UserStatus;
 import com.example.userservice.domain.Visibilities;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ResponseUserDto {
+public class ResponseUserDTO {
 
   private String uid;
   private String email;

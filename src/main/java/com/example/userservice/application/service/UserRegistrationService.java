@@ -1,8 +1,8 @@
 package com.example.userservice.application.service;
 
 import com.example.userservice.adapter.out.persistence.UserPersistenceAdapter;
-import com.example.userservice.application.port.in.dto.RequestUserDto;
-import com.example.userservice.application.port.in.dto.ResponseUserDto;
+import com.example.userservice.application.port.in.dto.RequestUserDTO;
+import com.example.userservice.application.port.in.dto.ResponseUserDTO;
 import com.example.userservice.application.usecase.UserRegistrationUseCase;
 import com.example.userservice.common.mapper.UserDomainMapper;
 import com.example.userservice.domain.User;
@@ -16,12 +16,12 @@ public class UserRegistrationService implements UserRegistrationUseCase {
   private UserPersistenceAdapter userPersistenceAdapter;
 
   @Override
-  public ResponseUserDto register(RequestUserDto userDto) {
-    userPersistenceAdapter.checkExistUser(userDto.getEmail());
+  public ResponseUserDTO register(RequestUserDTO userDTO) {
+    userPersistenceAdapter.checkExistUser(userDTO.getEmail());
 
-    User user = UserDomainMapper.INSTANCE.requestUserDtoToUserDomain(userDto);
+    User user = UserDomainMapper.INSTANCE.toUserDomain(userDTO);
     User savedUser = userPersistenceAdapter.register(user);
 
-    return UserDomainMapper.INSTANCE.toResponseUserDto(savedUser);
+    return UserDomainMapper.INSTANCE.toResponseUserDTO(savedUser);
   }
 }

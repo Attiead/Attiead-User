@@ -1,10 +1,10 @@
 package com.example.userservice.application.usecase;
 
-import com.example.userservice.application.port.in.dto.RequestUpdateUserDto;
-import com.example.userservice.application.port.in.dto.ResponseUserDto;
+import com.example.userservice.application.port.in.dto.RequestUpdateUserDTO;
+import com.example.userservice.application.port.in.dto.ResponseUserDTO;
 
 public interface UpdateUserUseCase {
 
-  ResponseUserDto update(RequestUpdateUserDto requestUpdateUserDto);
+  ResponseUserDTO update(RequestUpdateUserDTO requestUpdateUserDTO);
 
 }
