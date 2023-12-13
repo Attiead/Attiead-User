@@ -1,6 +1,7 @@
 package com.example.userservice.adapter.out.persistence;
 
 import com.example.userservice.application.port.out.CheckExistUserPort;
+import com.example.userservice.application.port.out.DeleteUserPort;
 import com.example.userservice.application.port.out.LoadAllUsersPort;
 import com.example.userservice.application.port.out.LoadUserPort;
 import com.example.userservice.application.port.out.UpdateUserPort;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserPersistenceAdapter
     implements UserRegistrationPort, CheckExistUserPort, LoadAllUsersPort, LoadUserPort,
-    UpdateUserPort {
+    UpdateUserPort, DeleteUserPort {
 
   private final UserRepository userRepository;
 
@@ -61,5 +62,13 @@ public class UserPersistenceAdapter
     savedUserEntity.update(user);
 
     return UserEntityMapper.INSTANCE.toUserDomainEntity(savedUserEntity);
+  }
+
+  @Override
+  public void delete(String uid) {
+    UserEntity savedUserEntity = userRepository.findByUid(uid)
+        .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
+
+    userRepository.delete(savedUserEntity);
   }
 }
