@@ -32,8 +32,8 @@ public class SecurityConfig {
         .sessionManagement(sessionManagement ->
             sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         )    // 세션을 사용하지 않으므로 STATELESS 설정
-        .csrf(
-            AbstractHttpConfigurer::disable)  //cross site request 는 쿠키를 기반한 인증방식, REST API에서는 사용안해도 무방
+        .csrf(AbstractHttpConfigurer::disable)  //cross site request 는 쿠키를 기반한 인증방식, REST API에서는 사용안해도 무방
+        .cors(AbstractHttpConfigurer::disable)
         .addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
         .build();
   }

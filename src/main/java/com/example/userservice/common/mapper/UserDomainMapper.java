@@ -20,6 +20,7 @@ public interface UserDomainMapper {
   @Mapping(target = "uid", ignore = true)
   User toUserDomain(RequestUserDTO requestUserDTO);
 
+  @Mapping(target = "email", ignore = true)
   User toUserDomain(RequestUpdateUserDTO requestUpdateUserDTO);
 
 }

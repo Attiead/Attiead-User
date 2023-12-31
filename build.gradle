@@ -1,3 +1,13 @@
+// 1. Import 추가
+import org.hidetake.gradle.swagger.generator.GenerateSwaggerUI
+
+// 2. buildscript 추가
+buildscript {
+	ext {
+		restdocsApiSpecVersion = '0.17.1'
+	}
+}
+
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.2'
@@ -5,6 +15,9 @@ plugins {
 	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 	id 'com.google.cloud.tools.jib' version '3.2.1'
 	id 'checkstyle'
+	id 'com.epages.restdocs-api-spec' version "${restdocsApiSpecVersion}"	// 3. openAPI 플러그인 추가
+	id 'org.hidetake.swagger.generator' version '2.18.2'	// 4. swaggerUI 플러그인 추가
+
 }
 
 group = 'com.example'
@@ -25,7 +38,6 @@ repositories {
 }
 
 ext {
-//	set('springCloudVersion', "2021.0.7")
 	set('snippetsDir', file("build/generated-snippets"))
 }
 
@@ -61,9 +73,13 @@ dependencies {
 
 	// test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'com.github.javafaker:javafaker:1.0.2'
+
+	// 7. RestDocs 추가
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	// 8. openAPI3 추가
+	testImplementation 'com.epages:restdocs-api-spec-mockmvc:' + restdocsApiSpecVersion
 
 	//mapstruct
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
@@ -74,6 +90,9 @@ dependencies {
 
   	checkstyle 'com.puppycrawl.tools:checkstyle:10.9.1'
 
+	// 9. SwaggerUI 추가
+	swaggerUI 'org.webjars:swagger-ui:4.18.1'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 }
 
 //dependencyManagement {
@@ -117,8 +136,49 @@ tasks.withType(Checkstyle) {
 		html.required = true
 	}
 }
+// 10. openapi3가 먼저 실행 - doFrist를 통한 Header 설정 (글에서 자세하게 설명)
+tasks.withType(GenerateSwaggerUI) {
+	dependsOn 'openapi3'
+//	doFirst {
+//		def swaggerUIFile = file("${openapi3.outputDirectory}/openapi3.yaml")
+//
+//		def securitySchemesContent =  "  securitySchemes:\n" +  \
+//                                      "    APIKey:\n" +  \
+//                                      "      type: apiKey\n" +  \
+//                                      "      name: Authorization\n" +  \
+//                                      "      in: header\n" + \
+//                                      "security:\n" +
+//				"  - APIKey: []  # Apply the security scheme here"
+//
+//		swaggerUIFile.append securitySchemesContent
+//	}
+}
 
-//checkstyle {
-//	configFile = file("${rootDir}/config/google_checks.xml") // 설정 파일 경로 지정
-////	configProperties = ["suppressionFile": "checkstyle/naver-checkstyle-suppressions.xml"]
+// 11. 생성된 openapi3 스펙을 기반으로 SwaggerUISample 생성 및 static/docs 패키지에 복사
+bootJar {
+	dependsOn ':openapi3'
+//	dependsOn 'generateSwaggerUISample'
+//	from("${generateSwaggerUISample.outputDir}") {
+//	from('build/api-spec') {
+//		into 'src/main/resources/static/docs'
+//	}
+}
+
+//// 5. 생성된 API 스펙이 어느 위치에 있는지 지정
+//swaggerSources {
+//	sample {
+//		setInputFile(file("${project.buildDir}/api-spec/openapi3.yaml"))
+////		setInputFile(file("${project.buildDir}/resources/main/static/docs/openapi3.yaml"))
+//	}
 //}
+
+// 6. openapi3 스펙 생성시 설정 정보
+openapi3 {
+	server = "http://localhost:8080"
+	title = "RESTDOC + SWAGGER를 이용한 TEST API 문서"
+	description = "RestDocsWithSwagger Test Docs"
+	version = "0.0.1"
+	format = "yaml"
+	outputDirectory="src/main/resources/static/docs"
+}
+

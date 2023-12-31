@@ -13,6 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class RequestUserDTO {
 
+  @NotBlank(message = "이메일은 필수 입력 값 입니다.")
   @Email(message = "이메일 형식이 맞지 않습니다.")
   private String email;
   @NotBlank(message = "비밀번호는 필수 입력 값 입니다.")
