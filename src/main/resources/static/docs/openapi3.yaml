@@ -1,0 +1,334 @@
+openapi: 3.0.1
+info:
+  title: RESTDOC + SWAGGER를 이용한 TEST API 문서
+  description: RestDocsWithSwagger Test Docs
+  version: 0.0.1
+servers:
+- url: http://localhost:8080
+tags: []
+paths:
+  /api/v1/users:
+    put:
+      tags:
+      - User Update TEST API
+      summary: 이용자 수정 TEST API
+      description: 이용자 수정 TEST API
+      operationId: 이용자 수정 TEST
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/api-v1-users1006657121'
+            examples:
+              이용자 수정 TEST:
+                value: |-
+                  {
+                    "uid" : "bff9e4f9-db83-443e-acff-d2f2c740bc4a",
+                    "password" : "0b1tvmzf",
+                    "grade" : "BRONZE",
+                    "status" : "ACTIVE",
+                    "role" : "USER",
+                    "name" : "이 서현",
+                    "nickname" : "Skip Roper",
+                    "biography" : "Agent Krypto",
+                    "visibility" : "OPENED"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-v1-user-sign-up713573743'
+              examples:
+                이용자 수정 TEST:
+                  value: |-
+                    {
+                      "data" : {
+                        "uid" : "bff9e4f9-db83-443e-acff-d2f2c740bc4a",
+                        "email" : "서윤.서@example.com",
+                        "password" : "0b1tvmzf",
+                        "grade" : "BRONZE",
+                        "status" : "ACTIVE",
+                        "role" : "USER",
+                        "name" : "이 서현",
+                        "nickname" : "Skip Roper",
+                        "biography" : "Agent Krypto",
+                        "visibility" : "OPENED"
+                      },
+                      "meta" : {
+                        "type" : "SUCCESS",
+                        "code" : "20000000",
+                        "message" : null
+                      }
+                    }
+  /api/v1/user/sign-up:
+    post:
+      tags:
+      - User Create TEST API
+      summary: 이용자 추가 TEST API
+      description: 이용자 추가 TEST API
+      operationId: 이용자 추가 TEST
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/api-v1-user-sign-up1787503745'
+            examples:
+              이용자 추가 TEST:
+                value: |-
+                  {
+                    "email" : "민재.정@example.com",
+                    "password" : "n01l86gb",
+                    "grade" : "BRONZE",
+                    "status" : "ACTIVE",
+                    "role" : "USER",
+                    "name" : "류 예준",
+                    "nickname" : "Constance Noring",
+                    "biography" : "Bloodhawk",
+                    "visibility" : "OPENED"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-v1-user-sign-up713573743'
+              examples:
+                이용자 추가 TEST:
+                  value: |-
+                    {
+                      "data" : {
+                        "uid" : "f79df7c0-fbd6-47a1-b2cd-e90d5fe0e534",
+                        "email" : "민재.정@example.com",
+                        "password" : "n01l86gb",
+                        "grade" : "BRONZE",
+                        "status" : "ACTIVE",
+                        "role" : "USER",
+                        "name" : "류 예준",
+                        "nickname" : "Constance Noring",
+                        "biography" : "Bloodhawk",
+                        "visibility" : "OPENED"
+                      },
+                      "meta" : {
+                        "type" : "SUCCESS",
+                        "code" : "20000000",
+                        "message" : null
+                      }
+                    }
+  /api/v1/users/{uid}:
+    get:
+      tags:
+      - User Info TEST API
+      summary: 이용자 조회 TEST API
+      description: 이용자 조회 TEST API
+      operationId: 이용자 조회 TEST
+      parameters:
+      - name: uid
+        in: path
+        description: UID
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-v1-user-sign-up713573743'
+              examples:
+                이용자 조회 TEST:
+                  value: |-
+                    {
+                      "data" : {
+                        "uid" : "16cafd08-2557-485d-bf16-a92735994adb",
+                        "email" : "우진.홍@example.com",
+                        "password" : "6jmyk4ra2gp",
+                        "grade" : "BRONZE",
+                        "status" : "ACTIVE",
+                        "role" : "USER",
+                        "name" : "홍 은주",
+                        "nickname" : "Mason Jarr",
+                        "biography" : "Magnificent Rocket Raccoon XI",
+                        "visibility" : "OPENED"
+                      },
+                      "meta" : {
+                        "type" : "SUCCESS",
+                        "code" : "20000000",
+                        "message" : null
+                      }
+                    }
+    delete:
+      tags:
+      - User Delete TEST API
+      summary: 이용자 삭제 TEST API
+      description: 이용자 삭제 TEST API
+      operationId: 이용자 삭제 TEST
+      parameters:
+      - name: uid
+        in: path
+        description: UID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/api-v1-users-uid486549215'
+            examples:
+              이용자 삭제 TEST:
+                value: _csrf=QZVD_CnWLpSGC59_vv_O7FNUDvy3aU3Q8LlFma8na6dOBfArdPZ1mky0S6yrOPlHjtL63WdjI8TSUXT9xo4h_5oXUsF4NccY
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api-v1-users-uid245651128'
+              examples:
+                이용자 삭제 TEST:
+                  value: |-
+                    {
+                      "data" : "33d6c1ae-9a37-42d4-ace7-dd938d498e1b",
+                      "meta" : {
+                        "type" : "SUCCESS",
+                        "code" : "20000000",
+                        "message" : null
+                      }
+                    }
+components:
+  schemas:
+    api-v1-users1006657121:
+      type: object
+      properties:
+        uid:
+          type: string
+          description: UID
+        password:
+          type: string
+          description: 비밀번호
+        role:
+          type: string
+          description: 권한
+        visibility:
+          type: string
+          description: 공개상태
+        grade:
+          type: string
+          description: 등급
+        nickname:
+          type: string
+          description: 닉네임
+        name:
+          type: string
+          description: 이름
+        biography:
+          type: string
+          description: 추가정보
+        status:
+          type: string
+          description: 상태
+    api-v1-user-sign-up713573743:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            uid:
+              type: string
+              description: UID
+            password:
+              type: string
+              description: 비밀번호
+            role:
+              type: string
+              description: 권한
+            visibility:
+              type: string
+              description: 공개상태
+            grade:
+              type: string
+              description: 등급
+            nickname:
+              type: string
+              description: 닉네임
+            name:
+              type: string
+              description: 이름
+            biography:
+              type: string
+              description: 추가정보
+            email:
+              type: string
+              description: 이메일
+            status:
+              type: string
+              description: 상태
+          description: data
+        meta:
+          type: object
+          properties:
+            code:
+              type: string
+              description: MetaCode
+            message:
+              type: string
+              description: message
+            type:
+              type: string
+              description: MetaCode name
+          description: meta
+    api-v1-user-sign-up1787503745:
+      type: object
+      properties:
+        password:
+          type: string
+          description: 비밀번호
+        role:
+          type: string
+          description: 권한
+        visibility:
+          type: string
+          description: 공개상태
+        grade:
+          type: string
+          description: 등급
+        nickname:
+          type: string
+          description: 닉네임
+        name:
+          type: string
+          description: 이름
+        biography:
+          type: string
+          description: 추가정보
+        email:
+          type: string
+          description: 이메일
+        status:
+          type: string
+          description: 상태
+    api-v1-users-uid245651128:
+      type: object
+      properties:
+        data:
+          type: string
+          description: uid
+        meta:
+          type: object
+          properties:
+            code:
+              type: string
+              description: MetaCode
+            message:
+              type: string
+              description: message
+            type:
+              type: string
+              description: MetaCode name
+          description: meta
+    api-v1-users-uid486549215:
+      type: object
