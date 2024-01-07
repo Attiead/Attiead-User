@@ -6,7 +6,6 @@ import com.example.userservice.application.usecase.UpdateUserUseCase;
 import com.example.userservice.common.response.ResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -78,3 +78,8 @@ logging:
       springframework:
         security=DEBUG:
 
+
+springdoc:
+  swagger-ui:
+    url: /docs/openapi3.yaml
+    path: /docs/swagger
