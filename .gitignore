@@ -36,3 +36,6 @@ out/
 ### VS Code ###
 .vscode/
 /db/
+
+### openapi3 Yaml ###
+/src/main/resources/static/docs/
