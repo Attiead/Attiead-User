@@ -1,4 +1,4 @@
-import com.epages.restdocs.apispec.gradle.OpenApi3Extension
+//import com.epages.restdocs.apispec.gradle.OpenApi3Extension
 
 
 plugins {
@@ -93,30 +93,30 @@ checkstyle {
   toolVersion = "10.9.1" // 처음에 낮은 버전을 사용했더니 깨지는 현상이 있었다. 설정파일의 내용에 맞는 버전을 선택
 }
 
-tasks {
-  withType<Test> {
-    useJUnitPlatform()
-  }
-
-  configure<OpenApi3Extension> {
-    setServer("http://localhost:8000")
-    title = "RESTDOC + SWAGGER를 이용한 TEST API 문서"
-    description = "RestDocsWithSwagger Test Docs"
-    version = "0.0.1"
-    format = "yaml"
-    outputDirectory = "build/apiSpec"
-    outputFileNamePrefix = "attiead-user"
-  }
-}
-
-
-jib { // https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin
-  from {
-    //https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin#from-closure
-    //https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin#setting-the-base-image
-    image = "eclipse-temurin:17-jre"
-  }
-  container {
-    creationTime = "USE_CURRENT_TIMESTAMP"
-  }
-}
+//tasks {
+//  withType<Test> {
+//    useJUnitPlatform()
+//  }
+//
+//  configure<OpenApi3Extension> {
+//    setServer("http://localhost:8000")
+//    title = "RESTDOC + SWAGGER를 이용한 TEST API 문서"
+//    description = "RestDocsWithSwagger Test Docs"
+//    version = "0.0.1"
+//    format = "yaml"
+//    outputDirectory = "build/apiSpec"
+//    outputFileNamePrefix = "attiead-user"
+//  }
+//}
+//
+//
+//jib { // https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin
+//  from {
+//    //https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin#from-closure
+//    //https://github.com/GoogleContainerTools/jib/tree/master/jib-gradle-plugin#setting-the-base-image
+//    image = "eclipse-temurin:17-jre"
+//  }
+//  container {
+//    creationTime = "USE_CURRENT_TIMESTAMP"
+//  }
+//}

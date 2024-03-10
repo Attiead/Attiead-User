@@ -1,8 +1,13 @@
 package com.example.userservice.common.exception;
 
-public class UserAccountNotFoundException extends RuntimeException {
+import com.example.userservice.common.response.model.MetaCode;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-  public UserAccountNotFoundException(String msg) {
-    super(msg);
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class UserAccountNotFoundException extends BaseHttpException {
+
+  public UserAccountNotFoundException(String message) {
+    super(MetaCode.NOT_FOUND, message, null);
   }
 }

@@ -20,6 +20,7 @@
 security:
   jwt:
     expired: 3600
+    secretkey: 8EF6D35BC965E6BC62A225B3B23E398E
 
 spring:
   datasource:
