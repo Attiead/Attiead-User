@@ -1,5 +1,6 @@
-package com.example.userservice.common.config;
+package com.example.userservice.common.exception;
 
+import com.example.userservice.common.exception.InvalidJwtTokenException;
 import com.example.userservice.common.exception.UserNotFoundException;
 import com.example.userservice.common.response.Meta;
 import com.example.userservice.common.response.ResponseDTO;
@@ -54,7 +55,7 @@ public class ExceptionAdviceHandler {
 
   @ExceptionHandler(
         { InternalServerException.class,
-            UserNotFoundException.class
+            UserNotFoundException.class,
         }
   )
   public ResponseDTO<Object> handleBaseHttpException(BaseHttpException error) {
@@ -72,6 +73,11 @@ public class ExceptionAdviceHandler {
     }
 
     return createErrorResponse(status, error.getMessage(), error.getData()).getBody();
+  }
+
+  @ExceptionHandler({ InvalidJwtTokenException.class })
+  public ResponseDTO<Object> handleJwtTokenException(InvalidJwtTokenException error) {
+    return createErrorResponse(HttpStatus.UNAUTHORIZED, error.getMessage(), error.getData()).getBody();
   }
 
   private ResponseEntity<ResponseDTO<Object>> createErrorResponse(

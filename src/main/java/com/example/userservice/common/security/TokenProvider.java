@@ -7,8 +7,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.Map;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -51,17 +49,14 @@ public class TokenProvider {
   public static String validToken(String jwt) {
     try {
       SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecretkey.getBytes(StandardCharsets.UTF_8));
-      Jwts.parserBuilder()
+
+      return (String) Jwts.parserBuilder()
           .setSigningKey(secretKey)
           .build()
-          .parseClaimsJws(jwt);
+          .parseClaimsJws(jwt)
+          .getBody()
+          .get("uid");
 
-      // Extracting Service ID
-      String[] chunks = jwt.split("\\.");
-      String payload = new String(Base64.getDecoder().decode(chunks[1]));
-      String uid = objectMapper.readValue(payload, Map.class).get("serviceId").toString();
-
-      return uid;
     } catch (Exception exception) {
       throw new InvalidJwtTokenException("Invalid Token");
     }
