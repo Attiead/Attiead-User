@@ -1,5 +1,7 @@
-package com.example.userservice.common.config;
+package com.example.userservice.common.exception;
 
+import com.example.userservice.common.exception.InvalidJwtTokenException;
+import com.example.userservice.common.exception.UserNotFoundException;
 import com.example.userservice.common.response.Meta;
 import com.example.userservice.common.response.ResponseDTO;
 import com.example.userservice.common.response.model.MetaCode;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 @Slf4j
@@ -50,7 +53,11 @@ public class ExceptionAdviceHandler {
     return createErrorResponse(HttpStatus.BAD_REQUEST, errorMessage, null);
   }
 
-  @ExceptionHandler({InternalServerException.class})
+  @ExceptionHandler(
+        { InternalServerException.class,
+            UserNotFoundException.class,
+        }
+  )
   public ResponseDTO<Object> handleBaseHttpException(BaseHttpException error) {
 
     HttpStatus status;
@@ -59,11 +66,18 @@ public class ExceptionAdviceHandler {
       status = HttpStatus.CONFLICT;
     } else if (error instanceof InternalServerException) {
       status = HttpStatus.INTERNAL_SERVER_ERROR;
+    } else if (error instanceof UserNotFoundException) {
+      status = HttpStatus.NOT_FOUND;
     } else {
       status = HttpStatus.INTERNAL_SERVER_ERROR;
     }
 
     return createErrorResponse(status, error.getMessage(), error.getData()).getBody();
+  }
+
+  @ExceptionHandler({ InvalidJwtTokenException.class })
+  public ResponseDTO<Object> handleJwtTokenException(InvalidJwtTokenException error) {
+    return createErrorResponse(HttpStatus.UNAUTHORIZED, error.getMessage(), error.getData()).getBody();
   }
 
   private ResponseEntity<ResponseDTO<Object>> createErrorResponse(

@@ -35,7 +35,7 @@ public class UserPersistenceAdapter
   @Override
   public void checkExistUser(String userEmail) {
     if (userRepository.existsByEmail(userEmail)) {
-      throw new ExistUserException(ErrorMessages.EXISTUSER.message);
+      throw new ExistUserException(ErrorMessages.EXIST_USER.message);
     }
   }
 
@@ -49,7 +49,7 @@ public class UserPersistenceAdapter
   @Override
   public User getUser(String uid) {
     UserEntity savedUserEntity = userRepository.findByUid(uid)
-        .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
+        .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USER_NOT_FOUND.message));
 
     return UserEntityMapper.INSTANCE.toUserDomainEntity(savedUserEntity);
   }
@@ -57,7 +57,7 @@ public class UserPersistenceAdapter
   @Override
   public User update(User user) {
     UserEntity savedUserEntity = userRepository.findByUid(user.getUid())
-        .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
+        .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USER_NOT_FOUND.message));
 
     savedUserEntity.update(user);
 
@@ -67,7 +67,7 @@ public class UserPersistenceAdapter
   @Override
   public void delete(String uid) {
     UserEntity savedUserEntity = userRepository.findByUid(uid)
-        .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message));
+        .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USER_NOT_FOUND.message));
 
     userRepository.delete(savedUserEntity);
   }

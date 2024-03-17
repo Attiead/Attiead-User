@@ -20,6 +20,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   public CustomUserDetails loadUserByUsername(String userEmail) {
     return new CustomUserDetails(
         UserEntityMapper.INSTANCE.toUserDomainEntity(userRepository.findByEmail(userEmail)
-            .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USERNOTFOUND.message + userEmail))));
+            .orElseThrow(() -> new UserNotFoundException(ErrorMessages.USER_NOT_FOUND.message + userEmail))));
   }
 }

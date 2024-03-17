@@ -43,7 +43,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 @WebMvcTest(UserUpdateController.class)
-@MockBean(JpaMetamodelMappingContext.class)
 @AutoConfigureRestDocs
 class UserUpdateControllerTest {
 
