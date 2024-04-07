@@ -28,18 +28,25 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
-#
-#  kafka:
-#    bootstrap-servers: localhost:29092
-#    producer:
-#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-#      client-id: my-producer
+
+  kafka:
+    bootstrap-servers: localhost:9091
+    producer:
+      client-id: user-producer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 #      retries: 1
 #      batch-size: 16384
 #      buffer-memory: 33554432
-#      compression-type: snappy
-#
+      compression-type: snappy
+    properties:
+      ssl.endpoint.identification.algorithm: https
+      sasl.mechanism: PLAIN
+      request.timeout.ms: 20000
+      security.protocol: SASL_SSL
+      retry.backoff.ms: 500
+      spring.json.add.type.headers: false
+
 #    consumer:
 #      group-id: user-service
 #      auto-offset-reset: latest

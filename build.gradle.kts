@@ -45,7 +45,7 @@ dependencies {
   implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
   // spring kafka
-//	implementation 'org.springframework.kafka:spring-kafka'
+  implementation("org.springframework.kafka:spring-kafka")
 
   // spring cloud
 //	implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'

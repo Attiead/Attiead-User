@@ -13,37 +13,40 @@ services: 	#service들 정의
     volumes:	#볼륨 지정
       - ./db/data:/var/lib/mysql2
 
-#
-#  zookeeper:
-#    image: confluentinc/cp-zookeeper:latest
-#    environment:
-#      ZOOKEEPER_SERVER_ID: 1
-#      ZOOKEEPER_CLIENT_PORT: 2181
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    hostname: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
 #      ZOOKEEPER_TICK_TIME: 2000
 #      ZOOKEEPER_INIT_LIMIT: 5
 #      ZOOKEEPER_SYNC_LIMIT: 2
-#    ports:
-#      - "22181:2181"
-#
-#
-#  kafka:
-#    image: confluentinc/cp-kafka:latest
-#    depends_on:
-#       - zookeeper
-#    ports:
-#      - "29092:29092"
-#    environment:
-#      KAFKA_BROKER_ID: 1
-#      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-#      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-#      KAFKA_CREATE_TOPICS: "my-topic"   # Topic명:Partition개수:Replica개수
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
+    volumes:
+      - ./kafka/data/zookeeper/data:/data
+      - ./kafka/data/zookeeper/datalog:/datalog
 
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    hostname: kafka
+    ports:
+      - "9091:9091"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_DOCKER_INTERNAL://kafka:19091,LISTENER_DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9091
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_DOCKER_INTERNAL:PLAINTEXT,LISTENER_DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_DOCKER_INTERNAL
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_CREATE_TOPICS: "user.login"   # Topic명:Partition개수:Replica개수
+    volumes:
+      - ./kafka/data/kafka/data:/tmp/kafka-logs
+    depends_on:
+      - zookeeper
 
 #networks:	#네트워크 설정
 #  starbucks_network_02:
