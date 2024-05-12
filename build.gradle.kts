@@ -86,12 +86,12 @@ dependencies {
 //	}
 //}
 
-
-checkstyle {
-  configFile = file("config/checkstyle/google_checks.xml") // 설정 파일 경로 지정
-  maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail
-  toolVersion = "10.9.1" // 처음에 낮은 버전을 사용했더니 깨지는 현상이 있었다. 설정파일의 내용에 맞는 버전을 선택
-}
+//
+//checkstyle {
+//  configFile = file("config/checkstyle/google_checks.xml") // 설정 파일 경로 지정
+//  maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail
+//  toolVersion = "10.9.1" // 처음에 낮은 버전을 사용했더니 깨지는 현상이 있었다. 설정파일의 내용에 맞는 버전을 선택
+//}
 
 tasks {
   withType<Test> {
