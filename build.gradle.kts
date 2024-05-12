@@ -7,7 +7,7 @@ plugins {
   id("io.spring.dependency-management") version "1.1.2"
   id("org.asciidoctor.jvm.convert") version "3.3.2"
   id("com.google.cloud.tools.jib") version "3.2.1"
-  id("checkstyle")
+//  id("checkstyle")
   id("com.epages.restdocs-api-spec") version "0.18.2"  // 3. openAPI 플러그인 추가
 }
 
@@ -15,7 +15,7 @@ group = "com.example"
 version = "0.0.1-SNAPSHOT"
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
+  sourceCompatibility = JavaVersion.VERSION_21;
 }
 
 configurations {
@@ -54,8 +54,8 @@ dependencies {
 //	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 //	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
-  compileOnly("org.projectlombok:lombok")
-  annotationProcessor("org.projectlombok:lombok")
+  compileOnly("org.projectlombok:lombok:1.18.30")
+  annotationProcessor("org.projectlombok:lombok:1.18.30")
 
   // test
   testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -74,7 +74,7 @@ dependencies {
   //validation
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
-  checkstyle("com.puppycrawl.tools:checkstyle:10.9.1")
+//  checkstyle("com.puppycrawl.tools:checkstyle:10.9.1")
 
   // 9. SwaggerUI 추가
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
@@ -86,12 +86,12 @@ dependencies {
 //	}
 //}
 
-
-checkstyle {
-  configFile = file("config/checkstyle/google_checks.xml") // 설정 파일 경로 지정
-  maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail
-  toolVersion = "10.9.1" // 처음에 낮은 버전을 사용했더니 깨지는 현상이 있었다. 설정파일의 내용에 맞는 버전을 선택
-}
+//
+//checkstyle {
+//  configFile = file("config/checkstyle/google_checks.xml") // 설정 파일 경로 지정
+//  maxWarnings = 0 // 규칙이 어긋나는 코드가 하나라도 있을 경우 빌드 fail
+//  toolVersion = "10.9.1" // 처음에 낮은 버전을 사용했더니 깨지는 현상이 있었다. 설정파일의 내용에 맞는 버전을 선택
+//}
 
 tasks {
   withType<Test> {

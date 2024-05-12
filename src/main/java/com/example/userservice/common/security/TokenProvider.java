@@ -1,18 +1,17 @@
 package com.example.userservice.common.security;
 
 import com.example.userservice.common.exception.InvalidJwtTokenException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.security.Key;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Service
@@ -24,8 +23,6 @@ public class TokenProvider {
   @Value("${security.jwt.secretkey}")
   private static String jwtSecretkey;
 
-  private static ObjectMapper objectMapper;
-
   public static String createToken(String uid) {
 
     Instant issueAt = Instant.now();
@@ -33,7 +30,7 @@ public class TokenProvider {
     // Prepare the JWT builder
     JwtBuilder jwtBuilder = Jwts.builder()
         .setIssuedAt(Date.from(issueAt))
-        .setExpiration(Date.from(issueAt.plus(jwtExpired, ChronoUnit.MINUTES)));
+        .setExpiration(Date.from(issueAt.plus(Duration.ofMinutes(jwtExpired))));
 
     // Prepare the signing key
     SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;

@@ -1,5 +1,6 @@
 package com.example.userservice.common.security;
 
+import com.example.userservice.application.service.event.UserLoginEventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
 
   private final UserDetailsService userDetailsService;
+  private final UserLoginEventService userLoginEventService;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -63,7 +65,7 @@ public class SecurityConfig {
 
   @Bean
   public SavedRequestAwareAuthenticationSuccessHandler customLoginSuccessHandler() {
-    return new CustomLoginSuccessHandler();
+    return new CustomLoginSuccessHandler(userLoginEventService);
   }
 
   @Bean

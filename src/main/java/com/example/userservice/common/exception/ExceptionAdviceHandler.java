@@ -1,13 +1,8 @@
 package com.example.userservice.common.exception;
 
-import com.example.userservice.common.exception.InvalidJwtTokenException;
-import com.example.userservice.common.exception.UserNotFoundException;
 import com.example.userservice.common.response.Meta;
 import com.example.userservice.common.response.ResponseDTO;
 import com.example.userservice.common.response.model.MetaCode;
-import com.example.userservice.common.exception.BaseHttpException;
-import com.example.userservice.common.exception.ConflictException;
-import com.example.userservice.common.exception.InternalServerException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import java.util.Objects;
@@ -18,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
 @Slf4j
