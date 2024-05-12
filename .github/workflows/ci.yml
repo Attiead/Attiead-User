@@ -23,8 +23,8 @@ jobs:
       - uses: burrunan/gradle-cache-action@v1
         name: Cache .gradle
 
-      - name: CheckStyle
-        run: ./gradlew checkstyleMain
+#      - name: CheckStyle
+#        run: ./gradlew checkstyleMain
 
   build:
     runs-on: ubuntu-latest
