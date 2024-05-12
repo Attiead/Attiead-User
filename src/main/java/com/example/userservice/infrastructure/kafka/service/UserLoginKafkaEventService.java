@@ -4,8 +4,8 @@ import com.example.userservice.application.service.event.UserLoginEventService;
 import com.example.userservice.application.service.event.dto.UserLoginEventDTO;
 import com.example.userservice.common.logback.HttpLog;
 import com.example.userservice.infrastructure.kafka.dto.KafkaMessageDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
@@ -30,7 +30,7 @@ public class UserLoginKafkaEventService implements UserLoginEventService {
   }
 
   @Override
-  public void publish(UserLoginEventDTO userLoginEventDTO) {
+  public void publish(UserLoginEventDTO userLoginEventDTO) throws JsonProcessingException {
     KafkaMessageDTO<UserLoginEventDTO> kafkaMessageDTO = new KafkaMessageDTO<>(
         topicName,
         userLoginEventDTO.getUid(),
