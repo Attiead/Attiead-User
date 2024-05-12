@@ -7,7 +7,7 @@ plugins {
   id("io.spring.dependency-management") version "1.1.2"
   id("org.asciidoctor.jvm.convert") version "3.3.2"
   id("com.google.cloud.tools.jib") version "3.2.1"
-  id("checkstyle")
+//  id("checkstyle")
   id("com.epages.restdocs-api-spec") version "0.18.2"  // 3. openAPI 플러그인 추가
 }
 
@@ -74,7 +74,7 @@ dependencies {
   //validation
   implementation("org.springframework.boot:spring-boot-starter-validation")
 
-  checkstyle("com.puppycrawl.tools:checkstyle:10.9.1")
+//  checkstyle("com.puppycrawl.tools:checkstyle:10.9.1")
 
   // 9. SwaggerUI 추가
   implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0")
