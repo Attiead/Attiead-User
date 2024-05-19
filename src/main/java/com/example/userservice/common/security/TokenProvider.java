@@ -23,7 +23,7 @@ public class TokenProvider {
   @Value("${security.jwt.secretkey}")
   private static String jwtSecretkey;
 
-  public static String createToken(String uid) {
+  public String createToken(String uid) {
 
     Instant issueAt = Instant.now();
 
@@ -43,7 +43,7 @@ public class TokenProvider {
         .compact(); // JWT 토큰 생성
   }
 
-  public static String validToken(String jwt) {
+  public String validToken(String jwt) {
     try {
       SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecretkey.getBytes(StandardCharsets.UTF_8));
 
