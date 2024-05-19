@@ -27,6 +27,7 @@ public class SecurityConfig {
 
   private final UserDetailsService userDetailsService;
   private final UserLoginEventService userLoginEventService;
+  private final TokenProvider tokenProvider;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -65,7 +66,7 @@ public class SecurityConfig {
 
   @Bean
   public SavedRequestAwareAuthenticationSuccessHandler customLoginSuccessHandler() {
-    return new CustomLoginSuccessHandler(userLoginEventService);
+    return new CustomLoginSuccessHandler(userLoginEventService, tokenProvider);
   }
 
   @Bean

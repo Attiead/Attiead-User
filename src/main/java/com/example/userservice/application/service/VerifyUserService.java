@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class VerifyUserService implements AuthorizeUserUseCase {
 
+  private final TokenProvider tokenProvider;
   @Override
   public String verifyUser(String token) {
-    String uid = TokenProvider.validToken(token);
+    String uid = tokenProvider.validToken(token);
 
     return uid;
   }

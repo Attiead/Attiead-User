@@ -16,12 +16,13 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
   private final UserLoginEventService userLoginEventService;
+  private final TokenProvider tokenProvider;
 
   @Override
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
       Authentication authentication) throws JsonProcessingException {
     User user = ((CustomUserDetails) authentication.getPrincipal()).getUser();
-    String token = TokenProvider.createToken(user.getUid());
+    String token = tokenProvider.createToken(user.getUid());
     response.addHeader(HttpHeaders.AUTHORIZATION, AuthConstants.TOKEN_TYPE + " " + token);
     userLoginEventService.publish(UserLoginEventDTO.builder()
         .uid(user.getUid())
